@@ -228,7 +228,7 @@ return [
              * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
              * the following line and set the port accordingly
              */
-            //'port' => 'non_standard_port_number',
+        //    'port' => '3306',
             'username' => 'root',
             'password' => '0000',
             'database' => 'cook',
@@ -246,7 +246,7 @@ return [
              * decreases performance because each query needs to be traversed and
              * manipulated before being executed.
              */
-            'quoteIdentifiers' => false,
+            'quoteIdentifiers' => true ,
 
             /**
              * During development, if using MySQL < 5.6, uncommenting the

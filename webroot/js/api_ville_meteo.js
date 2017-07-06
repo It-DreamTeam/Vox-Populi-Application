@@ -19,6 +19,23 @@ $('#city_btn').click(function (event) {
       var result = $('#city').val();
 
       if (result != "") {
+        $.ajax({
+          type: "POST",
+          url: "search/getWeather",
+          dataType: "json",
+          data: {
+            city: result
+          },
+          success: function(data) {
+              console.log("tititit")
+          },
+          error: function(err){
+            console.log("louhlh")
+          }
+        })
+
+
+
         $.getJSON('http://www.prevision-meteo.ch/services/json/'+result, function(data) {
             console.log(data);
             $('#result_city').append(data);
@@ -26,9 +43,34 @@ $('#city_btn').click(function (event) {
             $('#name_ville').html(data.city_info.name);
             $('#summary').html(data.current_condition.condition);
 
+            /* DRINKS ----------------------------------------------------------------------- */
+            var date1 = new Date()
+            $.ajax({
+              type: "POST",
+              url: "search/getDrinks",
+              dataType: "json",
+              data: {
+                  "temp" : data.current_condition.condition_key,
+                  "temperature": data.current_condition.tmp,
+                  "date": date1.getHours(),
+              },
+              success: function(data) {
+                $('#drinksA').html(data[0].name)
+                $('#videoA').attr('src',"https://www.youtube.com/embed/"+ data[0].videos[0].video)
+                $('#drinksNA').html(data[1].name)
+                $('#videoNA').attr('src',"https://www.youtube.com/embed/"+ data[1].videos[0].video)
+              },
+              error : function (err){
+                console.log("DRINKS ERROR : ", err)
+              }
+            })
+            /* ------------------------------------------------------------------------------- */
 
             $('.weather #inner').css('background','linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%)');
             $('#card .details').css('color','#888');
+
+
+
 
             switch (data.current_condition.condition_key) {
               case "ensoleille":
@@ -45,7 +87,6 @@ $('#city_btn').click(function (event) {
               case "nuit-avec-developpement-nuageux":
               case "nuit-faiblement-orageuse":
               case "nuit-avec-averses-de-neige-faible":
-
                   $('.weather #inner').css('background','linear-gradient(to bottom, rgba(0, 0, 0, 0.58) 50%, rgba(185, 185, 185, 0.52) 100%)');
                   $('#card .details').css('color','rgb(239, 237, 237)');
 

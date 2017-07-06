@@ -7,15 +7,19 @@
     $this->Form->templates($myTemplates);
 ?>
 
-<?= $this->Form->create('user', [
-    'role'  => 'form-role',
-    'class' => 'form-login'
-]);
-?>
+
     <h2 class="form-login-heading"><?= __('Connection') ?></h2>
     <div class="login-wrap">
         <?php echo $this->Flash->render('auth'); ?>
         <?php echo $this->Flash->render(); ?>
+
+        <?php
+        echo $this->Form->create(null, [
+            'url' => ['controller' => 'Connexion', 'action' => 'connect']
+        ]);
+
+
+?>
 
         <?= $this->Form->input('email', ['label'       => FALSE,
                                             'div'         => FALSE,

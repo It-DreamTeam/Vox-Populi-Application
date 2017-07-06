@@ -14,7 +14,7 @@
 </head>
 <body>
 
-
+	<a href="<?= $this->Url->build(['controller' => 'connexion', 'action' => 'logout']); ?>"> Déconnexion </a>
 
 	<div class="background">
 	      <div class="container">
@@ -62,10 +62,23 @@
 	      			</div>
 
 	      		</div>
+
+
+
 	      	</div>
+		<div id="drinksA"> </div>
+					<iframe width="1000" height="1000" id="videoA"src="" frameborder="0" allowfullscreen></iframe>
+
+
+
+					<div id="drinksNA"> </div>
+									<iframe width="1000" height="1000" id="videoNA"frameborder="0" allowfullscreen></iframe>
 	      	<svg id="outer"></svg>
 	      </div>
 	</div>
+
+
+
 	<script src="js/app.js" type="text/javascript"></script>
 
 
