@@ -59,15 +59,17 @@ $data['password'] = Security::hash($data['password'], 'sha1', true);
                               ->first();
       if($result){
         if($result['avatar'] != null){
-          $this->Flash->set('Utilisateur Google connard !! ');
+          $this->Flash->set('Utilisateur Google connard !! ', ['element' => 'error']);
           $this->redirect(['controller' => 'connexion', 'action' => 'index']);
         }else{
+          $this->Flash->set('Vous êtes maintenant connecté', ['element' => 'success']);
           $this->Auth->setUser($result->toArray());
           $this->redirect(['controller' => 'search', 'action' => 'index']);
         }
       }else{
-          $this->Flash->set('Inscrit toi connard!');
-          $this->redirect(['controller' => 'signup', 'action' => 'index']);
+          $this->Flash->set('Inscrit toi connard!', ['element' => 'error']);
+          //$this->redirect(['controller' => 'signup', 'action' => 'index']);
+          $this->redirect(['controller' => 'connexion', 'action' => 'index']);
       }
      }
    }

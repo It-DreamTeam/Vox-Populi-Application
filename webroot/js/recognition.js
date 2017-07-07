@@ -1,12 +1,9 @@
 var geocityfr = "";
 
-
   $(".buttonRec").on('click', function() {
-
     $(this).toggleClass("active");
     switchRecognition();
   });
-
 
 var accessToken = "4b8289d60d15475f8380de1d4086aff6";
 var baseUrl = "https://api.api.ai/v1/";
@@ -23,7 +20,6 @@ $(document).ready(function() {
 });
 var recognition;
 function startRecognition() {
-  console.log('start');
   recognition = new webkitSpeechRecognition();
   recognition.onstart = function(event) {
     updateRec();
@@ -81,16 +77,12 @@ function send() {
     },
     data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
     success: function(data) {
-      console.log(JSON.stringify(data, undefined, 2));
       non_compris = data.result.fulfillment.speech;
-        console.log(data.result.fulfillment.speech);
-        console.log(data.result.parameters.geocityfr);
         if(data.result.parameters.geocityfr != undefined && data.result.fulfillment.speech == "") {
-          setInput2(data.result.parameters.geocityfr);
+					setInput2(data.result.parameters.geocityfr);
           geocityfr = data.result.parameters.geocityfr;
-          getMeteo();
-          $('.overlay').hide();
-          $('#main').css('visibility','visible');
+          localStorage.setItem('geocityfr', data.result.parameters.geocityfr);
+          window.location = '/search/home';
         }
         else {
           alert(non_compris);

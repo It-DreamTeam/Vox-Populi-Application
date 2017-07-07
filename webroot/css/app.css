@@ -1,18 +1,131 @@
-@import "https://fonts.googleapis.com/css?family=Lato:300";
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i");
 @import "https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css";
+@import url("https://fonts.googleapis.com/css?family=Josefin+Slab:300,300i,400,400i,600,600i");
+.overlay {
+  background: red;
+  height: 100vh;
+}
+
 html, body, .background {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Lato', sans-serif; }
+  font-family: 'Roboto', sans-serif; }
 
-html {
-  background: #fff; }
+#body_corp {
+  width: 50%;
+  margin: 0 auto; }
+  #body_corp input {
+    width: 100%;
+    height: 50px;
+    padding: 1%;
+    margin: 30px; }
+  #body_corp .hide {
+    display: none; }
+  #body_corp button {
+    width: 50px; }
+  #body_corp textarea {
+    width: 100%; }
 
-body {
-  background: #eee;
-  background: linear-gradient(0deg, rgba(0, 0, 200, 0.2), rgba(0, 0, 200, 0)); }
+.buttonRec {
+  width: 80px;
+  height: 80px;
+  border: 10px solid #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: #2a406d;
+  margin: 0 auto;
+  margin-top: 3%;
+  margin-bottom: 3%; }
+
+.innerRec {
+  background-color: #9e1919;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  transform: scale(0.94); }
+
+.buttonRec.active .innerRec {
+  transform: scale(0.5);
+  border-radius: 12%; }
+
+header {
+  width: 100%;
+  height: 50vh;
+  background-color: #dddddd;
+  text-align: center;
+  position: relative;
+  position: fixed;
+  top: 0;
+  overflow: hidden;
+  transition: all .5s ease; }
+  header nav {
+    position: absolute;
+    bottom: 0;
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1); }
+    header nav a {
+      color: #fff;
+      display: inline-block;
+      padding: 10px 15px;
+      line-height: 1;
+      text-decoration: none;
+      border-radius: 2px; }
+      header nav a:hover {
+        box-shadow: 0 0 0 1px #fff; }
+
+h2 {
+  font-size: 34px;
+  text-transform: uppercase;
+  font-weight: 100;
+  line-height: 2;
+  color: #2c3e50; }
+
+p {
+  margin-bottom: 2rem;
+  line-height: 2;
+  color: #7f8c8d; }
+
+.wrapper {
+  margin: 0 auto;
+  padding-top: 55vh; }
+
+#proposition h1 {
+  font-size: 2.5em;
+  text-align: center;
+  font-family: 'Josefin Slab', serif; }
+
+section {
+  padding: 20px;
+  margin-bottom: 40px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); }
+
+/* Sticky Header Style */
+/* ---------------------------------------- */
+body.sticky-header {
+  padding-top: 100px; }
+  body.sticky-header header {
+    height: 250px;
+    background-color: rgba(52, 152, 219, 0.9); }
+    body.sticky-header header .weather {
+      background: #363636; }
+    body.sticky-header header .background #inner {
+      transform: scale(0);
+      display: none; }
+    body.sticky-header header .background #SVGID_1_ {
+      display: none; }
+    body.sticky-header header .background #card .details {
+      margin-top: 8%; }
+      body.sticky-header header .background #card .details .temp {
+        color: #f6f6f6; }
+      body.sticky-header header .background #card .details #summary {
+        color: #f6f6f6; }
 
 .background {
   background: #eee;
@@ -27,7 +140,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
   background: #eee;
   background: linear-gradient(240deg, rgba(150, 50, 50, 0.3), rgba(0, 0, 200, 0)); }
@@ -50,17 +163,16 @@ nav li a {
     color: #4444ff; }
 
 #card {
-  box-shadow: 9px 7px 40px -6px rgba(0, 0, 0, 0.25);
   overflow: hidden;
   width: 100%;
   height: 500vh;
   padding: 0;
   min-height: 300px;
-  margin: 20px;
   border-radius: 5px;
   position: relative; }
   #card .details {
     position: absolute;
+    margin-top: 12%;
     top: 0;
     left: 0;
     right: 0;
@@ -69,7 +181,7 @@ nav li a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    transition: color 2s ease; }
+    transition: all 2s ease; }
     .thunder #card .details {
       color: #ddd; }
     #card .details .right {
@@ -77,10 +189,10 @@ nav li a {
     #card .details #date {
       margin: 4px 0; }
     #card .details #summary {
-      font-weight: 600;
-      font-size: 22px; }
+      font-weight: 300;
+      font-size: 2.5em; }
     #card .details .temp {
-      font-size: 60px;
+      font-size: 5.8em;
       line-height: 60px; }
       #card .details .temp span {
         font-size: 18px;
@@ -89,17 +201,18 @@ nav li a {
         margin-left: 5px; }
 
 .weather {
-  background-color: #DAE3FD;
+  background-color: rgba(204, 231, 255, 0.76);
   transition: background-color 2s ease; }
   .thunder .weather {
     background-color: #9FA4AD; }
   .rain .weather {
     background-color: #D8D8D8; }
   .sun .weather {
-    background-color: #ccccff; }
+    background-color: red; }
   .weather #inner {
     background-color: white;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%); }
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+    width: 100%; }
   .weather .cloud {
     transition: fill 2s ease; }
   .weather #cloud1 {
@@ -117,6 +230,7 @@ nav li a {
 
 #outer, #back {
   position: fixed;
-  pointer-events: none; }
+  pointer-events: none;
+}
 
 /*# sourceMappingURL=app.css.map */

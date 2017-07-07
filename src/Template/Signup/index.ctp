@@ -1,10 +1,7 @@
-<?php
-echo $this->Form->create(null, [
-    'url' => ['controller' => 'Signup', 'action' => 'index']
-]);
+<?php $this->assign('title', "S'inscrire"); ?>
 
+<?= $this->Form->create(null, array('url' => ['controller' => 'Signup', 'action' => 'index']));?>
 
-?>
 <?= $this->Form->input('firstname', ['label'       => FALSE,
                                     'div'         => FALSE,
                                     'class'       => 'form-control',
@@ -28,4 +25,4 @@ echo $this->Form->create(null, [
                                     'placeholder' => __('Mot de passe')
 ]); ?>
 <br/>
-<?= $this->Form->button('<i class="fa fa-lock"></i>' . __('S\'inscrire'), ['class' => 'btn btn-theme btn-block']) ?>
+<?= $this->Form->button(__('S\'inscrire'), ['class' => 'btn btn-theme btn-block']) ?>

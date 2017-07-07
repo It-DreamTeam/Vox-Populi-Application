@@ -94,6 +94,17 @@ function init()
 {
 	onResize();
 
+	// sticky-header function
+
+	$(window).scroll(function(){
+	 var winTop = $(window).scrollTop();
+	 if(winTop >= 30){
+		 $("body").addClass("sticky-header");
+	 }else{
+		 $("body").removeClass("sticky-header");
+	 }
+	});
+
 	// 🖱 bind weather menu buttons
 
 	for(var i = 0; i < weather.length; i++)
@@ -122,7 +133,7 @@ function onResize()
 {
 	// 📏 grab window and card sizes
 
-	sizes.container.width = container.width();
+	sizes.container.width = 950;//container.width();
 	sizes.container.height = container.height();
 	sizes.card.width = card.width();
 	sizes.card.height = card.height();
@@ -150,6 +161,9 @@ function onResize()
 	// 🍃 The leaf mask is for the leafs that float out of the
 	// container, it is full window height and starts on the left
 	// inline with the card
+
+console.log(sizes.container.width);
+console.log(sizes.card.offset.left);
 
 	leafMask.attr({x: sizes.card.offset.left, y: 0, width: sizes.container.width - sizes.card.offset.left,  height: sizes.container.height});
 }

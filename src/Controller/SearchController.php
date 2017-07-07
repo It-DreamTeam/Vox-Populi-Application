@@ -113,10 +113,8 @@ class SearchController extends AppController
   }
 
 
-
   public function getDrinks() {
     $http = new Client();
-
     switch ($_POST['temp']) {
       case "nuit-nuageuse":
       case "brouillard":
@@ -176,9 +174,8 @@ class SearchController extends AppController
         break;
     }
 
-
   if($_POST['temperature'] >= "28"){
-    if($_POST['date'] >= "11" && $_POST['date'] <= "17"){
+    if($_POST['date'] >= "05" && $_POST['date'] <= "17"){
       $date = "afternoon";
     }else if($_POST['date'] >= "17" && $_POST['date'] <= "19"){
       $date = "pre-dinner";
@@ -190,7 +187,8 @@ class SearchController extends AppController
     $urlNotAlcohol = "http://addb.absolutdrinks.com/drinks/not/alcoholic/tasting/" . $taste . "/for/". $date. "/with/ice-cubes?apiKey=328da11a6e5144929f6bf83e1dc9e5da";
     $urlAlcohol = "http://addb.absolutdrinks.com/drinks/alcoholic/tasting/" . $taste . "/for/". $date. "/with/ice-cubes?apiKey=328da11a6e5144929f6bf83e1dc9e5da";
   }else{
-    if($_POST['date'] >= "11" && $_POST['date'] <= "17"){
+
+    if($_POST['date'] >= "05" && $_POST['date'] <= "17"){
       $date = "afternoon";
     }else if($_POST['date'] >= "17" && $_POST['date'] <= "19"){
       $date = "pre-dinner";
@@ -199,10 +197,10 @@ class SearchController extends AppController
     }else if($_POST['date'] >= "21" && $_POST['date'] <= "05"){
       $date = "evening";
     }
+
     $urlNotAlcohol = "http://addb.absolutdrinks.com/drinks/not/alcoholic/tasting/" . $taste . "/for/". $date. "?apiKey=328da11a6e5144929f6bf83e1dc9e5da";
     $urlAlcohol = "http://addb.absolutdrinks.com/drinks/alcoholic/tasting/" . $taste . "/for/". $date. "?apiKey=328da11a6e5144929f6bf83e1dc9e5da";
   }
-
 
   $responseAlcohol = $http->get($urlAlcohol);
   $responseNotAlcohol = $http->get($urlNotAlcohol);
@@ -222,90 +220,23 @@ class SearchController extends AppController
   }
 
 
-/*
+  public function getSeries(){
+    $http = new Client();
+    $url ="https://api.betaseries.com/shows/random?nb=100&key=cb1d200d4a43";
+    $responseSerie = $http->get($url);
 
-public function getSerie(){
-
-  $http = new Client();
-
-  switch ($_POST['temp']) {
-    case "nuit-claire":
-    case "nuit-legerement-voilee":
-    case "nuit-claire-et-stratus":
-    case "nuit-avec-averses-de-neige-faible":
-    case "nuit-bien-degagee":
-    case "nuit-avec-developpement-nuageux":
-    case "nuit-nuageuse":
-    case "nuit-avec-averses-de-neige-faible":
-    case "nuit-faiblement-orageuse":
-    case "nuit-avec-averses":
-    case "nuit-faiblement-orageuse":
-      $typeserie = "Action";
-      break;
-    case "brouillard":
-      $typeserie = "Aventure";
-      break;
-    case "stratus":
-    case "stratus-se-dissipant":
-    case "fortement-nuageux":
-    case "developpement-nuageux":
-    case "faiblement-nuageux":
-    case "faibles-passages-nuageux":
-    case "ciel-voile":
-      $typeserie = "Romance";
-      break;
-    case "faiblement-orageux":
-    case "orage-modere":
-    case "fortement-orageux":
-      $typeserie = "Famille";
-      break;
-    case "couvert-avec-averses":
-    case "pluie-forte":
-    case "pluie-moderee":
-    case "neige-forte":
-    case "pluie-et-neige-melee-faible":
-    case "pluie-et-neige-melee-moderee":
-    case "pluie-et-neige-melee-forte":
-    case "averses-de-pluie-moderee":
-    case "averses-de-pluie-forte":
-    case "averses-de-pluie-faible":
-    case "averses-de-neige-faible":
-    case "neige-moderee":
-    case "neige-faible":
-    case "pluie-faible":
-      $typeserie = "Policier";
-      break;
-    case "ensoleille":
-    case "eclaircies":
-      $typeserie = "Comedie";
-      break;
-    default :
-      $typeserie = "https://api.betaseries.com/show/discover?key=cbbc8349d8fa";
-      break;
+    $nbSeries = count($responseSerie->json['shows']);
+    $nSeries= rand(0, $nbSeries );
+    die(json_encode($responseSerie->json['shows'][$nSeries]));
   }
 
-  $url ="https://api.betaseries.com/shows/random?nb=20&key=cb1d200d4a43"
 
-  $responseserie = $http->get($url);
+  public function getWeather() {
 
-  $nbserie = $responseserie->json['show'];
+  }
 
-  $serie = $re$responseserie->json['show']['genres'][$typeserie];
+  public function home() {
 
-  $res = array();
-  array_push($res, $serie, $notalcohol);
-  die(json_encode($res));
-
-}
-
-
-*/
-
-public function getWeather() {
-
-
-
-}
-
+  }
 
 }

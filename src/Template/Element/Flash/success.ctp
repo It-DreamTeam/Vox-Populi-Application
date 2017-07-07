@@ -1,3 +1,10 @@
+<style>
+.message{
+  background-color: green;
+  border: solid #333 1px;
+  color: #fff;
+}
+</style>
 <?php
 if (!isset($params['escape']) || $params['escape'] !== false) {
     $message = h($message);
