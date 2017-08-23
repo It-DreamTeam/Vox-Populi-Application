@@ -51,24 +51,23 @@ class ConnexionController extends AppController
    function connect() {
      if($this->request->is('post')){
        $data = $_POST;
-
        $users_table = TableRegistry::get('users');
 
-       $data['password'] = Security::hash($data['password'], 'sha1', true);
+$data['password'] = Security::hash($data['password'], 'sha1', true);
        $result = $users_table->find('all')
                               ->where(['email' => $data['email'], 'password' => $data['password']])
                               ->first();
       if($result){
         if($result['avatar'] != null){
-          $this->Flash->set('You\'re using a Google user..', ['element' => 'error']);
+          $this->Flash->set('Utilisateur Google connard !! ', ['element' => 'error']);
           $this->redirect(['controller' => 'connexion', 'action' => 'index']);
         }else{
+          $this->Flash->set('Vous êtes maintenant connecté', ['element' => 'success']);
           $this->Auth->setUser($result->toArray());
-          $this->request->session()->write('firstName', $result["firstname"]);
           $this->redirect(['controller' => 'search', 'action' => 'index']);
         }
       }else{
-          $this->Flash->set('You should first sign up.', ['element' => 'error']);
+          $this->Flash->set('Inscrit toi connard!', ['element' => 'error']);
           //$this->redirect(['controller' => 'signup', 'action' => 'index']);
           $this->redirect(['controller' => 'connexion', 'action' => 'index']);
       }

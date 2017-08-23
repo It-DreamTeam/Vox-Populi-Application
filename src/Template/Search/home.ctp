@@ -1,7 +1,7 @@
 <?php $this->assign('title', "Résultats"); ?>
 <?=$this->Html->script('jquery-3.2.1');?>
 <?=$this->Html->css('style');?>
-<?=$this->Html->css('app');?>
+<?=$this->Html->css('app1');?>
 <?=$this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js');?>
 <?=$this->Html->script('https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js');?>
 
@@ -69,11 +69,8 @@
 
   <section id='steezy'>
     <h2>Shows</h2>
-		<div >
-			<div id="img" ></div> <br>
-			<div id="serie" style="font-weight: bold; font-size: 40px;"> </div><br>
-			<div id="SDescription" style="text-align: justify;"> </div>
-		</div>
+		<div id="serie"> </div>
+		<div id="SDescription"> </div>
 	</section>
 
   <section id='real'>

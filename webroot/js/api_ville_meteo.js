@@ -21,6 +21,8 @@ $( document ).ready(function() {
         $('#result_city').append(data);
         if (data.current_condition != undefined) {
 
+
+
                     /*  $.ajax({
                         type: "POST",
                         url: "search/getWeather",
@@ -38,7 +40,7 @@ $( document ).ready(function() {
 
 
 
-         /* DRINKS ----------------------------------------------------------------------- */
+                    /* DRINKS ----------------------------------------------------------------------- */
                     var date1 = new Date()
                     $.ajax({
                       type: "POST",
@@ -59,30 +61,21 @@ $( document ).ready(function() {
                         console.log("DRINKS ERROR : ", err)
                       }
                     })
-          /* ------------------------------------------------------------------------------- */
+                    /* ------------------------------------------------------------------------------- */
 
 
-					/* SERIES  ----------------------------------------------------------------------- */
                     $.ajax({
                       type: "GET",
                       url: "/search/getSeries",
                       dataType: "json",
                       success: function(data) {
-												console.log(data)
-                      	$('#serie').html( data.title)
-                      	$('#SDescription').html(data.description)
-												var img = new Image()
-												img.src = data.images.poster
-												img.height = 250
-												img.width = 250
-												$("#img").html(img)
-											},
+                      $('#serie').html( data.title)
+                      $('#SDescription').html(data.description)
+                      },
                       error : function (err){
                         console.log("series ERROR : ", err)
                       }
                     })
-
-					/* ------------------------------------------------------------------------------- */
 
 
           $('#name_ville').html(data.city_info.name);
