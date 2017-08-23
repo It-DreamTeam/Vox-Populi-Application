@@ -7,6 +7,8 @@ var geocityfr = "";
 
 var accessToken = "4b8289d60d15475f8380de1d4086aff6";
 var baseUrl = "https://api.api.ai/v1/";
+
+
 $(document).ready(function() {
   $("#input").keypress(function(event) {
     if (event.which == 13) {
@@ -18,7 +20,10 @@ $(document).ready(function() {
     switchRecognition();
   });
 });
+
 var recognition;
+
+
 function startRecognition() {
   recognition = new webkitSpeechRecognition();
   recognition.onstart = function(event) {
@@ -41,6 +46,8 @@ function startRecognition() {
   recognition.start();
 }
 
+
+
 function stopRecognition() {
   if (recognition) {
     recognition.stop();
@@ -48,6 +55,9 @@ function stopRecognition() {
   }
   updateRec();
 }
+
+
+
 function switchRecognition() {
   if (recognition) {
     stopRecognition();
@@ -55,18 +65,28 @@ function switchRecognition() {
     startRecognition();
   }
 }
+
+
 function setInput(text) {
   $("#input").val(text);
   send();
 }
+
+
 function setInput2(text) {
   $('#city').val(text);
 }
+
+
 function updateRec() {
   //$("#rec").text(recognition ? "Stop" : "Speak");
 }
+
+
+
 function send() {
   var text = $("#input").val();
+
   $.ajax({
     type: "POST",
     url: baseUrl + "query?v=20150910",
@@ -85,6 +105,23 @@ function send() {
           window.location = '/search/home';
         }
         else {
+/*
+
+API FOOD - RESEARCH
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
           alert(non_compris);
         }
 

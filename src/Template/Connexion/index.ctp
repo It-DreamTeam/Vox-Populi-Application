@@ -14,10 +14,10 @@
     </div>
     <div>
 
+
+
       <?= $this->Form->create(null, array('url' => ['controller' => 'Connexion', 'action' => 'connect'], 'class'=>'form-signin', 'id'=>'form_connexion')); ?>
-
         <?= $this->Flash->render() ?>
-
         <label for="username">Email</label>
         <?= $this->Form->input('email', ['label'=>false, 'div'=>false, 'class'=>'form-styling']); ?>
         <label for="password">Mot de passe</label>
@@ -28,22 +28,27 @@
         <div class="btn-animate-google">
           <a class="btn-signin-google" href="<?= $this->Url->build(['action' => 'googlelogin']); ?>">Se connecter via Google</a>
         </div>
-
       <?= $this->Form->end(); ?>
 
-			<form class="form-signup" action="" method="post" name="form">
-        <label for="fullname">Full name</label>
-        <input class="form-styling" type="text" name="fullname" placeholder=""/>
+
+
+
+      <?= $this->Form->create(null, array('url' => ['controller' => 'Signup', 'action' => 'index'], 'class'=>'form-signup', 'id'=>'form_connexion')); ?>
+        <label for="firstname">First name</label>
+        <input class="form-styling" type="text" name="firstname" placeholder=""/>
+        <label for="lastname">Last name</label>
+        <input class="form-styling" type="text" name="lastname" placeholder=""/>
         <label for="email">Email</label>
         <input class="form-styling" type="text" name="email" placeholder=""/>
         <label for="password">Password</label>
         <input class="form-styling" type="text" name="password" placeholder=""/>
-        <label for="confirmpassword">Confirm password</label>
-        <input class="form-styling" type="text" name="confirmpassword" placeholder=""/>
-        <a ng-click="checked = !checked" class="btn-signup">Sign Up</a>
-			</form>
+        <?= $this->Form->button(__('Sign Up'), ['class' => 'btn-signup']) ?>
+			<?= $this->Form->end(); ?>
 
-      <div class="success">
+
+
+
+  <<!--    <div class="success">
         <svg width="270" height="270" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
  viewBox="0 0 60 60" id="check" ng-class="checked ? 'checked' : ''">
            <path fill="#ffffff" d="M40.61,23.03L26.67,36.97L13.495,23.788c-1.146-1.147-1.359-2.936-0.504-4.314
@@ -53,17 +58,22 @@
              <p> Thanks for signing up! Check your email for confirmation.</p>
           </div>
        </div>
-      </div>
+     </div>
+
+     <div>
+       <div class="cover-photo"></div>
+       <div class="profile-photo"></div>
+       <h1 class="welcome">Bienvenue toi</h1>
+       <a class="btn-goback" value="Refresh" onClick="history.go()">Go back</a>
+     </div>
+
+
+   -->
 
       <div class="forgot">
         <a href="#">Mot de passe oublié?</a>
       </div>
 
-      <div>
-        <div class="cover-photo"></div>
-        <div class="profile-photo"></div>
-        <h1 class="welcome">Bienvenue toi</h1>
-        <a class="btn-goback" value="Refresh" onClick="history.go()">Go back</a>
-      </div>
+
   </div>
 </div>

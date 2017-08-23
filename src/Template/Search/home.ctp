@@ -69,8 +69,11 @@
 
   <section id='steezy'>
     <h2>Shows</h2>
-		<div id="serie"> </div>
-		<div id="SDescription"> </div>
+		<div >
+			<div id="img" ></div> <br>
+			<div id="serie" style="font-weight: bold; font-size: 40px;"> </div><br>
+			<div id="SDescription" style="text-align: justify;"> </div>
+		</div>
 	</section>
 
   <section id='real'>

@@ -2,7 +2,7 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css";
 @import url("https://fonts.googleapis.com/css?family=Josefin+Slab:300,300i,400,400i,600,600i");
 .overlay {
-  background: red;
+  background: white;
   height: 100vh;
 }
 

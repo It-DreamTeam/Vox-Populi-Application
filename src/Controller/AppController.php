@@ -72,6 +72,7 @@ class AppController extends Controller
                 'controller' => 'Connexion',
                 'action' => 'index'
               ],
+            //  'logout' => ['controller' => 'Connexion', 'action' => 'index'],
               /*'loginRedirect'        => [
                   'controller' => 'Search',
                   'action'     => 'index'

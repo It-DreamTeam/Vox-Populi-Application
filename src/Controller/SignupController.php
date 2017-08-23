@@ -19,16 +19,15 @@ class SignupController extends AppController
       $users_table = TableRegistry::get('users');
 
       // Utilise la valeur du salt de l'application
-$data['password'] = Security::hash($data['password'], 'sha1', true);
-    //  $data['password'] = Security::encrypt($data['password'], $sha1);
-
-
+      $data['password'] = Security::hash($data['password'], 'sha1', true);
       $entity = $users_table->newEntity($data);
+
 
       if ($users_table->save($entity)) {
 // et ensuite nous déclarons l'utilisateur comme authentifié sur CakePHP
           $data['id'] = $entity->id;
           $this->Auth->setUser($data);
+          $this->request->session()->write('firstName', $data["firstname"]);
           $this->redirect(['controller' => 'Search', 'action' => 'index']);
       } else {
           $this->Flash->set('Erreur d\'inscription');
