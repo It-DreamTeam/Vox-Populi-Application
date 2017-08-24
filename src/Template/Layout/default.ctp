@@ -4,10 +4,9 @@
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moodify - <?= $this->fetch('title') ?></title>
-    <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('app.css') ?>
-    <?= $this->Html->css('style.css') ?>
+    <?= $this->Html->css('flexboxgrid') ?>
+    <?=$this->Html->css('login');?>
+    <?= $this->Html->css('style') ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
