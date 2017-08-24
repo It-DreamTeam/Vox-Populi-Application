@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row center-xs logo">
         <div class="col-xs-6">
-            <div class="box">
+            <div>
                 <?=$this->Html->image('sun.png');?>
                 <div class="">
                     <h1>Moodify app</h1>

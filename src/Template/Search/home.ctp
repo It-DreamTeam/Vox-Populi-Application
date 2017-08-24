@@ -30,12 +30,12 @@
         </div>
     </div>
 </header>
-<div class="wrapper">
+<div class="">
     <div class="tab-wrap">
         <input type="radio" name="tabs" id="food" checked>
         <div class="tab-label-content" id="tab1-content">
             <label for="food">
-                <?=$this->Html->image('food/chicken.png');?> <br>
+                <?=$this->Html->image('food/chicken.png');?><br>
                 <span>Food</span>
             </label>
             <div class="tab-content">
@@ -45,7 +45,7 @@
         <input type="radio" name="tabs" id="drinks">
         <div class="tab-label-content" id="tab2-content">
             <label for="drinks">
-                <?=$this->Html->image('food/chicken.png');?> <br>
+                <?=$this->Html->image('drinks/glass.png');?>
                 <span>Food</span>
             </label>
             <div class="tab-content">
@@ -61,20 +61,37 @@
         </div>
         <input type="radio" name="tabs" id="activities">
         <div class="tab-label-content" id="tab3-content">
-            <label for="activities">Activities</label>
+            <label for="activities">
+                <?=$this->Html->image('activities/activities.png');?> <br>
+                <span>Activities</span>
+            </label>
             <div class="tab-content">Here on propose une activité selon la météo, if --> fait beau alors on les envoie dors, else --> on propose de lire un livre regarder des films, bref</div>
         </div>
         <input type="radio" name="tabs" id="movies">
         <div class="tab-label-content" id="tab4-content">
-            <label for="movies">Movies</label>
+            <label for="movies">
+                <?=$this->Html->image('movies/old-television.png');?> <br>
+                <span>Movies &amp; series</span>
+            </label>
             <div class="tab-content">
                 <section id='steezy'>
-                    <h2>Movies and series</h2>
                     <div id="serie"></div>
                 </section>
             </div>
         </div>
         <div class="slide"></div>
+    </div>
+    <div class="sticky-input">
+        <div class="effectwrap">
+            <input class="effect-9" type="text" placeholder="Placeholder Text">
+            <span class="focus-border">
+        <i></i>
+        </span>
+        </div>
+        <div class="buttonRec">
+            <div class="innerRec">
+            </div>
+        </div>
     </div>
 </div>
 

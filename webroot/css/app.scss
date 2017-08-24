@@ -15,22 +15,6 @@ $num-of-tabs: 4;
   }
 }
 
-html, body {
-  width: 100%;
-}
-
-h1 {
-  font-size: 26px;
-  background: $cyan;
-  color: white;
-  padding: 40px 0 100px 20%;
-  margin-bottom: 50px;
-}
-
-label, p, a, h1, div {
-  font-family: Roboto, sans-serif;
-}
-
 .tab-wrap {
   width: 100%;
   //margin-left: 20%;
@@ -64,18 +48,20 @@ input[type="radio"][name="tabs"] {
   }
 }
 
-label {
-  cursor: pointer;
-  color: rgba(255,255,255,0.8);
-  background-color: $cyan;
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 56px;
-  transition: color 0.2s ease;
-  width: 100%;
+.tab-wrap {
+  label {
+    cursor: pointer;
+    color: rgba(255,255,255,0.8);
+    background-color: $cyan;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 56px;
+    transition: color 0.2s ease;
+    width: 100%;
+  }
 }
 
 .slide {
@@ -99,13 +85,30 @@ label {
   }
 }
 
-@media screen and (max-width: 800px) {
-  h1 {
-    padding: 40px 0 90px 10%;
+
+.sticky-input {
+  background: $cyan;
+  width: 100%;
+  position: fixed;
+  bottom:0;
+  padding-top: 1em;
+  input {
+    margin: 0 auto;
   }
+}
+
+@media screen and (max-width: 800px) {
   .tab-wrap {
     width: 100%;
     //margin-left: 10%;
     //top: -106px;
   }
+}
+
+
+// .row w/o marges
+
+.row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
