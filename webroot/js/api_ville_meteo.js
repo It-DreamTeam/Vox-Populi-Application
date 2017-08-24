@@ -3,16 +3,6 @@ var non_compris;
 
 $( document ).ready(function() {
 
-	$(window).scroll(function(){
-		 var winTop = $(window).scrollTop();
-		 if(winTop >= 30){
-			 $("body").addClass("sticky-header");
-		 }else{
-			 $("body").removeClass("sticky-header");
-		 }
-		});
-
-	var view = "";
 	getMeteo = function getMeteo(){
   	var result =  localStorage.getItem('geocityfr');
 
@@ -79,11 +69,7 @@ $( document ).ready(function() {
 
 
           $('#name_ville').html(data.city_info.name);
-          $('#summary').html(data.current_condition.condition);
-          $('#temperature_ville').html(data.current_condition.tmp+"<span>c</span>");
-
-          $('.weather #inner').css('background','linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%)');
-          $('#card .details').css('color','#888');
+          $('#temperature_ville').html(data.current_condition.tmp+"<span> °c</span>");
 
           switch (data.current_condition.condition_key) {
             case "ensoleille":
@@ -100,9 +86,6 @@ $( document ).ready(function() {
             case "nuit-avec-developpement-nuageux":
             case "nuit-faiblement-orageuse":
             case "nuit-avec-averses-de-neige-faible":
-
-                $('.weather #inner').css('background','linear-gradient(to bottom, rgba(0, 0, 0, 0.58) 50%, rgba(185, 185, 185, 0.52) 100%)');
-                $('#card .details').css('color','rgb(239, 237, 237)');
 
                 weather = "night";
                 break;
@@ -145,8 +128,7 @@ $( document ).ready(function() {
             default:console.log("Error de condition_key")
 
           }
-					console.log('TEST1');
-          changeWeather(weather);
+            $('#summary img').attr('src', '/img/weather/' + weather + '.svg');
         }else {
             alert("Ville non française");
         }

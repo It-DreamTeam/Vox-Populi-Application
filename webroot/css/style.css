@@ -57,3 +57,50 @@ textarea { width: 100%; }
 #body_corp textarea {
   width: 100%;
 }
+
+/*  First result page */
+
+.w-icons img{
+  width: 15%;
+  color: #ffffff;
+}
+
+.review {
+  margin-top: 1.2em;
+}
+
+.review span{
+  display: block;
+}
+.weather {
+  color: #ffffff;
+}
+
+.city {
+  font-weight: 600;
+  font-size: 1.8em;
+  margin-bottom: 0.2em;
+}
+
+.time {
+  font-size: 1.8em;
+}
+
+.temp-wrap {
+  border-right: 1px #ffffff solid;
+}
+
+.locate-review {
+  padding: 1em 0;
+}
+
+.temp-city {
+  font-size: 3.8em;
+  font-weight: 300;
+  padding: 0.5em 0;
+}
+
+.status {
+  font-style: italic;
+  font-weight: 100;
+}

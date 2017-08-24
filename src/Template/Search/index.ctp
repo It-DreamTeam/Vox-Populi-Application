@@ -27,5 +27,4 @@
 		<input type="text" name="city" placeholder="Saisissez une ville" id="city" class="hide">
 	</div>
 </div>
-
 <?=$this->Html->script('recognition');?>
