@@ -79,7 +79,7 @@ class AppController extends Controller
               ],*/
             ]);
 
-                 $this->Auth->allow(['index', 'googlelogin', 'logout', 'connect', 'getDrinks', 'getWeather', 'getSeries','home']);
+                 $this->Auth->allow(['index', 'food', 'drinks', 'googlelogin', 'logout', 'connect', 'getDrinks', 'getWeather', 'getSeries','home']);
 
         /*
          * Enable the following components for recommended CakePHP security settings.

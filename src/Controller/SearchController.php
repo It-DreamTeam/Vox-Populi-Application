@@ -239,4 +239,11 @@ class SearchController extends AppController
 
   }
 
+  public function food(){
+
+  }
+
+  public function drinks(){
+
+  }
 }

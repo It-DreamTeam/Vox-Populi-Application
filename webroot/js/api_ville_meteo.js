@@ -21,23 +21,6 @@ $( document ).ready(function() {
         $('#result_city').append(data);
         if (data.current_condition != undefined) {
 
-                    /*  $.ajax({
-                        type: "POST",
-                        url: "search/getWeather",
-                        dataType: "json",
-                        data: {
-                          city: result
-                        },
-                        success: function(data) {
-                            console.log("tititit")
-                        },
-                        error: function(err){
-                          console.log("louhlh")
-                        }
-                      })*/
-
-
-
          /* DRINKS ----------------------------------------------------------------------- */
                     var date1 = new Date()
                     $.ajax({
