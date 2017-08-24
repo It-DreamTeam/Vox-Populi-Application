@@ -2,10 +2,9 @@ input { width: 350px; }
 button { width: 50px; }
 textarea { width: 100%; }
 
-
 .buttonRec {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   border: 10px solid #fff;
   border-radius: 50%;
   cursor: pointer;
@@ -33,4 +32,28 @@ textarea { width: 100%; }
 #back{
   top: 0;
   left: 0;
+}
+
+#body_corp {
+  width: 50%;
+  margin: 0 auto;
+}
+
+#body_corp input {
+  width: 100%;
+  height: 70px;
+  padding: 1%;
+  margin: 30px;
+}
+
+#body_corp .hide {
+  display: none;
+}
+
+#body_corp button {
+  width: 50px;
+}
+
+#body_corp textarea {
+  width: 100%;
 }

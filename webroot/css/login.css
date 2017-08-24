@@ -3,6 +3,8 @@ html, body * { box-sizing: border-box; font-family: 'Open Sans', sans-serif;}
 body {
   margin: 0;
   padding: 0;
+  background: #00869d;
+  background-image: url('../img/shattered.png');
 }
 
 .container {
@@ -11,12 +13,20 @@ body {
 
 .frame {
   width: 100%;
-  background: #333333;
   transition: all .5s ease;
 }
 
 .logo {
+  margin-top: 25px;
+}
+
+.logo h1{
   text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 2.5em;
+  color: #ffffff;
+  padding-top: 10px;
 }
 
 .frame-long {
@@ -55,7 +65,7 @@ li {
   padding-bottom: 10px;
   color: #ffffff;
   text-decoration: none;
-  border-bottom: solid 2px #1059FF;
+  border-bottom: solid 2px #00869d;
   transition: all .25s ease;
   cursor: pointer;
 }
@@ -72,7 +82,7 @@ li {
   cursor: pointer;
   color: #ffffff;
   text-decoration: none;
-  border-bottom: solid 2px #1059FF;
+  border-bottom: solid 2px #00869d;
   padding-bottom: 10px;
 }
 
