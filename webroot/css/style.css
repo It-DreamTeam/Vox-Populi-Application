@@ -87,7 +87,7 @@ textarea { width: 100%; }
 }
 
 .temp-wrap {
-  border-right: 1px #ffffff solid;
+  border-right: 1px rgba(230, 230, 230, 0.4) solid;
 }
 
 .locate-review {
@@ -96,11 +96,44 @@ textarea { width: 100%; }
 
 .temp-city {
   font-size: 3.8em;
-  font-weight: 300;
+  font-weight: 100;
   padding: 0.5em 0;
+  font-family: 'Roboto', sans-serif;
 }
 
 .status {
   font-style: italic;
   font-weight: 100;
+}
+
+/* mediaqueries breakpoints */
+
+@media only screen and (min-width: 65.250em) and (max-width: 90.000em) {
+  /* en dessus de 971px - NORMAL SITE */
+
+}
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  /* en dessous de 970px - TABET */
+
+}
+@media only screen and (max-width: 40em) {
+  /* en dessous de 600px - PHABLETT */
+  .w-icons img {
+    width: 90%;
+  }
+  .temp-city {
+    padding: 0.2em 0.2em;
+    font-size: 3.2em;
+  }
+  .locate-review {
+    padding: 0.5em 0;
+  }
+  .time {
+    font-size: 0.9em;
+    font-weight: 300;
+  }
+}
+@media screen and (max-width: 480px) {
+  /* en dessous de 480px - MOBILE */
+
 }

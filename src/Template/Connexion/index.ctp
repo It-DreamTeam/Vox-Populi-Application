@@ -1,7 +1,5 @@
 <?php $this->assign('title', "Connexion"); ?>
 <?=$this->Html->css('login');?>
-<?=$this->Html->css('https://fonts.googleapis.com/css?family=Open+Sans:400,300,700');?>
-<?=$this->Html->css('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i" rel="stylesheet');?>
 <?=$this->Html->script('jquery-3.2.1');?>
 <?=$this->Html->script('login');?>
 

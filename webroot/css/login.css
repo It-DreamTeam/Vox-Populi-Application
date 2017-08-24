@@ -1,10 +1,11 @@
-html, body * { box-sizing: border-box; font-family: 'Open Sans', sans-serif;}
+html, body * { box-sizing: border-box;}
 
 body {
   margin: 0;
   padding: 0;
   background: #00869d;
   background-image: url('../img/shattered.png');
+  font-family: 'Roboto', sans-serif;
 }
 
 .container {
