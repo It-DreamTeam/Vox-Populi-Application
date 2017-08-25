@@ -70,6 +70,10 @@ $( document ).ready(function() {
 
           $('#name_ville').html(data.city_info.name);
           $('#temperature_ville').html(data.current_condition.tmp+"<span> °c</span>");
+          $('#humidity_ville').html(data.current_condition.humidity);
+          $('#heure_ville').html(data.current_condition.hour);
+          $('#statut_ville').html(data.current_condition.condition);
+          $('#wind_ville').html(data.current_condition.wnd_spd+" km/h "+data.current_condition.wnd_dir);
 
           switch (data.current_condition.condition_key) {
             case "ensoleille":

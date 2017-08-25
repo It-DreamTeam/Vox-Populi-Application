@@ -26,7 +26,7 @@ input[type="radio"][name="tabs"] {
 .tab-wrap label {
   cursor: pointer;
   color: rgba(255, 255, 255, 0.8);
-  background-color: rgba(0, 134, 157, 0.49);
+  background-color: #00738a;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
@@ -55,13 +55,33 @@ input[type="radio"][name="tabs"] {
     display: none; }
 
 .sticky-input {
-  background: rgba(0, 134, 157, 0.49);
+  background: #00738a;
   width: 100%;
   position: fixed;
   bottom: 0;
   padding-top: 1em; }
   .sticky-input input {
     margin: 0 auto; }
+
+.user-name {
+  color: #f6f6f6;
+  font-style: italic; }
+
+.user-img {
+  border-radius: 50%;
+  display: block;
+  overflow: hidden;
+  height: 50px;
+  width: 50px; }
+  .user-img img {
+    max-height: 100%; }
+
+.btn-signout {
+  color: #fafafa;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  font-size: 0.8em; }
 
 @media screen and (max-width: 800px) {
   .tab-wrap {

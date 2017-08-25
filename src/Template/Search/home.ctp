@@ -6,14 +6,14 @@
 <header>
     <div class="weather row center-lg center-xs">
         <div class="col-lg-6 col-xs-6">
-            <div id="summaryy" class="w-icons"><?=$this->Html->image('weather/sun.svg');?></div>
+            <div id="summary" class="w-icons"><?=$this->Html->image('weather/sun.svg');?></div>
         </div>
         <div class="col-lg-6 col-xs-6">
             <div class="review">
                 <?=$this->Html->image('weather/raindrop.png');?>
-                <span>Humidity</span>
+                <span id="humidity_ville">Humidity</span>
                 <?=$this->Html->image('weather/wind.png');?>
-                <span>Wind</span>
+                <span id="wind_ville">Wind</span>
             </div>
         </div>
         <div class="col-lg-6 col-xs-6 temp-wrap">
@@ -23,9 +23,9 @@
             <div class="locate-review">
                 <div class="city" id="name_ville">Ville</div>
                 <div id="date">
-                    <span class="time">4:00</span>
+                    <span class="time" id="heure_ville">HEURE</span>
                 </div>
-                <span id="summary" class="status">Sunny</span>
+                <span id="statut_ville" class="status">Sunny</span>
             </div>
         </div>
     </div>

@@ -5,22 +5,27 @@
 <?=$this->Html->css('style');?>
 <?=$this->Html->css('app');?>
 <?=$this->Html->css('login');?>
-
 <?= $this->Flash->render() ?>
-<link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-
 <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
 
-
-<a style="color: black;" href="/connexion/logout"> Déconnexion </a>
-
-<h1 style="text-align: center; font-family: 'Indie Flower', cursive; font-size: 4em;" > Hello <?= $this->request->session()->read('firstName') ?></h1>
+<div class="row center-lg center-xs">
+    <div class="col-lg-6">
+        <a href="/connexion/logout" class="btn-signout"> Sign out <span><?=$this->Html->image('sign-out.png');?></span></a>
+    </div>
+    <div class="col-lg-6 user-info">
+        <span class="user-name">Barack OBAMA</span>
+        <div class="user-img">
+            <?=$this->Html->image('user-img.jpg');?>
+        </div>
+    </div>
+</div>
 <div class="row center-xs logo">
     <div class="col-xs-6">
         <div class="box">
             <?=$this->Html->image('sun.png');?>
             <div class="">
                 <h1>Moodify app</h1>
+                <h2>Bonjour, <?= $this->request->session()->read('firstName') ?></h2>
             </div>
         </div>
     </div>

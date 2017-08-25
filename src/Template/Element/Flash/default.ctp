@@ -10,7 +10,5 @@ if (!isset($params['escape']) || $params['escape'] !== false) {
 <!--<div class="--><?//= h($class) ?><!--" onclick="this.classList.add('hidden');">--><?//= $message ?><!--</div>-->
 
 <div class="<?= h($class) ?>" onclick="this.classList.add('hidden');">
-    <div class="successtext">
-        <p><?= $message ?></p>
-    </div>
+    <?= $message ?>
 </div>

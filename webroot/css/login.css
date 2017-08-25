@@ -144,25 +144,16 @@ li {
 }
 
 .success {
-  width: 80%;
-  height: 150px;
+  border-radius: 3px;
+  width: 100%;
   text-align: center;
-  opacity: .0;
+  /*opacity: .0;*/
   transition: all .8s .4s ease;
 }
 
 .success-left {
   transform: translateX(-406px);
   opacity: 1;
-}
-
-.successtext {
-  color: #ffffff;
-	font-size: 16px;
-	font-weight: 300;
-  margin-top: -35px;
-  padding-left: 37px;
-  padding-right: 37px;
 }
 
 .form-signin input, .form-signup input {
