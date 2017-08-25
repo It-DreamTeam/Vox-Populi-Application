@@ -222,7 +222,7 @@ return [
             'className' => 'Cake\Database\Connection',
             'driver' => 'Cake\Database\Driver\Mysql',
             'persistent' => false,
-            'host' => '192.168.33.13',
+            'host' => '192.168.33.12',
             /**
              * CakePHP will use the default DB port based on the driver selected
              * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
@@ -246,7 +246,7 @@ return [
              * decreases performance because each query needs to be traversed and
              * manipulated before being executed.
              */
-            'quoteIdentifiers' => false,
+            'quoteIdentifiers' => true ,
 
             /**
              * During development, if using MySQL < 5.6, uncommenting the
