@@ -95,7 +95,7 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
         //utterThis.lang = "en-US";
         synth.speak(utterThis);
 
-          if(data.result.parameters.geocityfr != undefined && data.result.fulfillment.speech == "") {
+          if(data.result) {
   					setInput2(data.result.parameters.geocityfr);
             geocityfr = data.result.parameters.geocityfr;
             localStorage.setItem('geocityfr', data.result.parameters.geocityfr);
