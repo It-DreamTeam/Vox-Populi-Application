@@ -51,7 +51,7 @@
             <div class="tab-content">
                 <div id='real'>
                     <h2>Alcoholic drink <div id="drinksA"></div> </h2>
-                    <iframe width="450" height="300" id="videoA"src="" frameborder="0" allowfullscreen></iframe>
+                    <iframe width="450" height="300" id="videoA" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div id='big'>
                     <h2>Soft drink <div id="drinksNA"> </div> </h2>
@@ -75,12 +75,15 @@
             </label>
             <div class="tab-content">
                 <section id='steezy'>
-                    <div id="serie"></div>
+                  <div id="serie" style="font-weight: bold; font-size: 40px;"> </div><br>
+                  <div id="img" ></div> <br>
+                  <div id="SDescription" style="text-align: justify;"> </div>
                 </section>
             </div>
         </div>
         <div class="slide"></div>
     </div>
+
     <div class="sticky-input">
         <div class="effectwrap">
             <input class="effect-9" type="text" placeholder="Placeholder Text">

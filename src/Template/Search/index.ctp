@@ -39,6 +39,7 @@
 
 <script>
 // GET CURRENT POSITION
+
 $(document).ready(function() {
 if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
@@ -48,7 +49,7 @@ if (navigator.geolocation) {
 })
 
 function showPosition(position) {
-		$.ajax({ url:'http://maps.googleapis.com/maps/api/geocode/json?latlng='+position.coords.latitude+','+position.coords.longitude+'&sensor=true',
+		$.ajax({ url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+position.coords.latitude+','+position.coords.longitude+'&sensor=true',
          success: function(data){
 					 console.log(data.results[0])
 	         for (var i = 0; i < data.results[4].address_components.length; i++) {
@@ -62,4 +63,6 @@ function showPosition(position) {
 		   }
 		})
 }
+
+
 </script>

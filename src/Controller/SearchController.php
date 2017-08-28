@@ -105,7 +105,7 @@ class SearchController extends AppController
                             $this->Flash->set('Erreur les informations Google n\'ont pas été trouvée');
                         }
                     } catch (\Exception $e) {
-                        $this->Flash->set('Grosse erreur Google, ca craint');
+                        $this->Flash->set('Grosse erreur Google, ça craint');
                         return $this->redirect(['controller' => 'Connexion', "action" => "index"]);
                     }
                 }
@@ -222,7 +222,7 @@ class SearchController extends AppController
 
   public function getSeries(){
     $http = new Client();
-    $url ="https://api.betaseries.com/shows/random?nb=100&key=cb1d200d4a43";
+    $url ="http://api.betaseries.com/shows/random?nb=100&key=cb1d200d4a43";
     $responseSerie = $http->get($url);
 
     $nbSeries = count($responseSerie->json['shows']);

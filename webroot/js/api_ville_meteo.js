@@ -30,42 +30,51 @@ $( document ).ready(function() {
 
 
 
-                    /* DRINKS ----------------------------------------------------------------------- */
-                    var date1 = new Date()
-                    $.ajax({
-                      type: "POST",
-                      url: "/search/getDrinks",
-                      dataType: "json",
-                      data: {
-                          "temp" : data.current_condition.condition_key,
-                          "temperature": data.current_condition.tmp,
-                          "date": date1.getHours(),
-                      },
-                      success: function(data) {
-                        $('#drinksA').html(data[0].name)
-                        $('#videoA').attr('src',"https://www.youtube.com/embed/"+ data[0].videos[0].video)
-                        $('#drinksNA').html(data[1].name)
-                        $('#videoNA').attr('src',"https://www.youtube.com/embed/"+ data[1].videos[0].video)
-                      },
-                      error : function (err){
-                        console.log("DRINKS ERROR : ", err)
-                      }
-                    })
-                    /* ------------------------------------------------------------------------------- */
+											var date1 = new Date()
+									 $.ajax({
+										 type: "POST",
+										 url: "/search/getDrinks",
+										 dataType: "json",
+										 data: {
+												 "temp" : data.current_condition.condition_key,
+												 "temperature": data.current_condition.tmp,
+												 "date": date1.getHours(),
+										 },
+										 success: function(data) {
+											 $('#drinksA').html(data[0].name)
+											 $('#videoA').attr('src',"https://www.youtube.com/embed/"+ data[0].videos[0].video)
+											 $('#drinksNA').html(data[1].name)
+											 $('#videoNA').attr('src',"https://www.youtube.com/embed/"+ data[1].videos[0].video)
+										 },
+										 error : function (err){
+											 console.log("DRINKS ERROR : ", err)
+										 }
+									 })
+				 /* ------------------------------------------------------------------------------- */
 
 
-                    $.ajax({
-                      type: "GET",
-                      url: "/search/getSeries",
-                      dataType: "json",
-                      success: function(data) {
-                      $('#serie').html( data.title)
-                      $('#SDescription').html(data.description)
-                      },
-                      error : function (err){
-                        console.log("series ERROR : ", err)
-                      }
-                    })
+				 /* SERIES  ----------------------------------------------------------------------- */
+									 $.ajax({
+										 type: "GET",
+										 url: "/search/getSeries",
+										 dataType: "json",
+										 success: function(data) {
+											 console.log(data)
+											 $('#serie').html( data.title)
+											 $('#SDescription').html(data.description)
+											 var img = new Image()
+											 img.src = data.images.poster
+											 img.height = 250
+											 img.width = 250
+											 $("#img").html(img)
+										 },
+										 error : function (err){
+											 console.log("series ERROR : ", err)
+										 }
+									 })
+
+				 /* ------------------------------------------------------------------------------- */
+
 
 
           $('#name_ville').html(data.city_info.name);
