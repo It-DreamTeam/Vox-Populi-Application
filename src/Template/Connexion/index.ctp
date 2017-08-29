@@ -39,7 +39,7 @@
 
 
 
-         <?= $this->Form->create(null, array('url' => ['controller' => 'Signup', 'action' => 'index'], 'class'=>'form-signup', 'id'=>'form_connexion')); ?>
+         <?= $this->Form->create(null, array('url' => ['controller' => 'Signup', 'action' => 'index'], 'class'=>'form-signup', 'id'=>'form_signup')); ?>
            <label for="firstname">First name</label>
            <input class="form-styling" type="text" name="firstname" placeholder=""/>
            <label for="lastname">Last name</label>
@@ -50,5 +50,7 @@
            <input class="form-styling" type="text" name="password" placeholder=""/>
            <?= $this->Form->button(__('Sign Up'), ['class' => 'btn-signup']) ?>
    			<?= $this->Form->end(); ?>
+
+        
   </div>
 </div>

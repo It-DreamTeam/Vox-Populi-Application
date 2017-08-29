@@ -80,9 +80,9 @@ class AppController extends Controller
 
 
                 if(null !== $this->request->session()->read('firstName') ){
-                     $this->Auth->allow(['getActivities','index', 'food', 'drinks', 'googlelogin', 'logout', 'connect', 'getDrinks', 'getWeather', 'getSeries','home']);
+                     $this->Auth->allow(['getActivities', '/Search/index','index', 'home', 'food', 'drinks', 'googlelogin', 'logout', 'connect', 'getDrinks', 'getWeather', 'getSeries','home']);
                 }else{
-                     $this->Auth->allow(['/connexion/index','connexion', 'googlelogin', 'connect', 'home']);
+                     $this->Auth->allow(['index', 'connexion', 'googlelogin', 'connect']);
                 }
         /*
          * Enable the following components for recommended CakePHP security settings.

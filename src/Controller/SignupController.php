@@ -36,7 +36,7 @@ class SignupController extends AppController
       }
 
     }
-    die();
+//    die();
 
   }
 

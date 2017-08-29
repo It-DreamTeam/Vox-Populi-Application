@@ -21,77 +21,85 @@ class SearchController extends AppController
 {
 
   public function index(){
-    $client = new Google_Client();
-    /* Création de notre client Google */
-                $client->setClientId(GOOGLE_OAUTH_CLIENT_ID);
-                $client->setClientSecret(GOOGLE_OAUTH_CLIENT_SECRET);
-                $client->setRedirectUri(GOOGLE_OAUTH_REDIRECT_URI);
-                $client->setScopes(array(
-                    "https://www.googleapis.com/auth/userinfo.profile",
-                    'https://www.googleapis.com/auth/userinfo.email'
-                ));
-                $client->setApprovalPrompt('auto');
-    /* si dans l'url le paramètre de retour Google contient 'code' */
-                if (isset($this->request->query['code'])) {
-    // Alors nous authentifions le client Google avec le code reçu
-                    $client->authenticate($this->request->query['code']);
-    // et nous plaçons le jeton généré en session
-                    $this->request->Session()->write('access_token', $client->getAccessToken());
-                }
-    /* si un jeton est en session, alors nous le plaçons dans notre client Google */
-                if ($this->request->Session()->check('access_token') && ($this->request->Session()->read('access_token'))) {
-                    $client->setAccessToken($this->request->Session()->read('access_token'));
-                }
-    /* Si le client Google a bien un jeton d'accès valide */
-                if ($client->getAccessToken()) {
-    // alors nous écrivons le jeton d'accès valide en session
-                    $this->request->Session()->write('access_token', $client->getAccessToken());
-    // nous créons une requête OAuth2 avec le client Google paramétré
-                    $oauth2 = new Google_Service_Oauth2($client);
-    // et nous récupérons les informations de l'utilisateur connecté
-                    $user = $oauth2->userinfo->get();
-                  try {
-                        if (!empty($user)) {
-    // si l'utilisateur est bien déclaré, nous vérifions si dans notre table Users il existe l'email de l'utilisateur déclaré ou pas
-                        $users_table = TableRegistry::get('users');
-                        $result = $users_table->find('all')
-                                               ->where(['email' => $user['email']])
-                                               ->first();
-                            if ($result) {
-    // si l'email existe alors nous déclarons l'utilisateur comme authentifié sur CakePHP
-                                $this->Auth->setUser($result->toArray());
-    // et nous redirigeons vers la page de succès de connexion
-                                //$this->redirect(GOOGLE_OAUTH_REDIRECT_URI);
-                            } else {
-    // si l'utilisateur n'est pas dans notre utilisateur, alors nous le créons avec les informations récupérées par Google+
-                                $data = array();
-                                $data['email'] = $user['email'];
-                                $data['firstname'] = $user['givenName'];
-                                $data['lastname'] = $user['familyName'];
-                                $data['avatar'] = $user['picture'];
-                                $data['link'] = $user['link'];
-                                $data['uuid'] = Text::uuid();
-                                $entity = $users_table->newEntity($data);
-                                if ($users_table->save($entity)) {
-    // et ensuite nous déclarons l'utilisateur comme authentifié sur CakePHP
-                                    $data['id'] = $entity->id;
-                                    $this->Auth->setUser($data);
-                                    $this->redirect($this->Auth->redirectUrl());
-                                } else {
-                                    $this->Flash->set('Erreur de connection');
-    // et nous redirigeons vers la page de succès de connexion
-                                    $this->redirect(['controller' => 'connexion', 'action' => 'index']);
-                                }
-                            }
-                        } else {
-    // si l'utilisateur n'est pas valide alors nous affichons une erreur
-                            $this->Flash->set('Erreur les informations Google n\'ont pas été trouvée');
-                        }
-                    } catch (\Exception $e) {
-                        $this->Flash->set('Grosse erreur Google, ça craint');
-                        return $this->redirect(['controller' => 'Connexion', "action" => "index"]);
-                    }
-                }
+
+    if(null !== $this->request->session()->read('firstName')){
+      $client = new Google_Client();
+      /* Création de notre client Google */
+                  $client->setClientId(GOOGLE_OAUTH_CLIENT_ID);
+                  $client->setClientSecret(GOOGLE_OAUTH_CLIENT_SECRET);
+                  $client->setRedirectUri(GOOGLE_OAUTH_REDIRECT_URI);
+                  $client->setScopes(array(
+                      "https://www.googleapis.com/auth/userinfo.profile",
+                      'https://www.googleapis.com/auth/userinfo.email'
+                  ));
+                  $client->setApprovalPrompt('auto');
+      /* si dans l'url le paramètre de retour Google contient 'code' */
+                  if (isset($this->request->query['code'])) {
+      // Alors nous authentifions le client Google avec le code reçu
+                      $client->authenticate($this->request->query['code']);
+      // et nous plaçons le jeton généré en session
+                      $this->request->Session()->write('access_token', $client->getAccessToken());
+                  }
+      /* si un jeton est en session, alors nous le plaçons dans notre client Google */
+                  if ($this->request->Session()->check('access_token') && ($this->request->Session()->read('access_token'))) {
+                      $client->setAccessToken($this->request->Session()->read('access_token'));
+                  }
+      /* Si le client Google a bien un jeton d'accès valide */
+                  if ($client->getAccessToken()) {
+      // alors nous écrivons le jeton d'accès valide en session
+                      $this->request->Session()->write('access_token', $client->getAccessToken());
+      // nous créons une requête OAuth2 avec le client Google paramétré
+                      $oauth2 = new Google_Service_Oauth2($client);
+      // et nous récupérons les informations de l'utilisateur connecté
+                      $user = $oauth2->userinfo->get();
+                    try {
+                          if (!empty($user)) {
+      // si l'utilisateur est bien déclaré, nous vérifions si dans notre table Users il existe l'email de l'utilisateur déclaré ou pas
+                          $users_table = TableRegistry::get('users');
+                          $result = $users_table->find('all')
+                                                 ->where(['email' => $user['email']])
+                                                 ->first();
+                              if ($result) {
+      // si l'email existe alors nous déclarons l'utilisateur comme authentifié sur CakePHP
+                                  $this->Auth->setUser($result->toArray());
+      // et nous redirigeons vers la page de succès de connexion
+                                  //$this->redirect(GOOGLE_OAUTH_REDIRECT_URI);
+                              } else {
+      // si l'utilisateur n'est pas dans notre utilisateur, alors nous le créons avec les informations récupérées par Google+
+                                  $data = array();
+                                  $data['email'] = $user['email'];
+                                  $data['firstname'] = $user['givenName'];
+                                  $data['lastname'] = $user['familyName'];
+                                  $data['avatar'] = $user['picture'];
+                                  $data['link'] = $user['link'];
+                                  $data['uuid'] = Text::uuid();
+                                  $entity = $users_table->newEntity($data);
+                                  if ($users_table->save($entity)) {
+      // et ensuite nous déclarons l'utilisateur comme authentifié sur CakePHP
+                                      $data['id'] = $entity->id;
+                                      $this->Auth->setUser($data);
+                                      $this->redirect($this->Auth->redirectUrl());
+                                  } else {
+                                      $this->Flash->set('Erreur de connection');
+      // et nous redirigeons vers la page de succès de connexion
+                                      $this->redirect(['controller' => 'connexion', 'action' => 'index']);
+                                  }
+                              }
+                          } else {
+      // si l'utilisateur n'est pas valide alors nous affichons une erreur
+                              $this->Flash->set('Erreur les informations Google n\'ont pas été trouvée');
+                          }
+                      } catch (\Exception $e) {
+                          $this->Flash->set('Grosse erreur Google, ça craint');
+                          return $this->redirect(['controller' => 'Connexion', "action" => "index"]);
+                      }
+                  }
+    }else{
+      debug("nulll");
+      $this->redirect(['controller' => 'connexion', 'action' => 'index']);
+    }
+    
+
   }
 
   public function getDrinks() {
