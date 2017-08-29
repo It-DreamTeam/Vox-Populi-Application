@@ -1,4 +1,5 @@
 var geocityfr = "";
+var proxy = 'https://cors-anywhere.herokuapp.com/';
 
 $(".buttonRec").on('click', function () {
     $(this).toggleClass("active");
@@ -76,6 +77,7 @@ function send() {
 
 if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("Météo") >= 0 ||text.toLowerCase().indexOf("meteo") >= 0 || text.toLowerCase().indexOf("Meteo") >= 0){
 // METEO API
+
   $.ajax({
       type: "POST",
       url: baseUrl + "query?v=20150910",
@@ -94,7 +96,6 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
         var utterThis = new SpeechSynthesisUtterance(say);
         //utterThis.lang = "en-US";
         synth.speak(utterThis);
-
           if(data.result) {
   					setInput2(data.result.parameters.geocityfr);
             geocityfr = data.result.parameters.geocityfr;
@@ -126,7 +127,6 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
         synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(say);
         synth.speak(utterThis);
-        var proxy = 'https://cors-anywhere.herokuapp.com/';
         localStorage.setItem('taste', data.result.parameters.taste);
 
         //NOT ALCOHOLIC
@@ -186,7 +186,7 @@ if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().index
         var utterThis = new SpeechSynthesisUtterance(say);
         synth.speak(utterThis);
 
-        var proxy = 'https://cors-anywhere.herokuapp.com/';
+
         // FOOD API
           $.ajax({
               type: "GET",
@@ -246,7 +246,6 @@ if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().index
       }
     })
 }else{
-  var proxy = 'https://cors-anywhere.herokuapp.com/';
   // FOOD API
     $.ajax({
         type: "GET",

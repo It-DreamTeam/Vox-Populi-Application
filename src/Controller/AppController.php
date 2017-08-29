@@ -54,13 +54,13 @@ class AppController extends Controller
                         ]
                     ]
                 ],
-                'authError'            => __('Vous ne possédez pas l\'autorisation d\'accéder à cette page'),
+                'authError'            => __('Vous ne possédez pas l\'autorisation pour accéder à cette page'),
                 'authorize'            => ['Controller'],
-                /*'unauthorizedRedirect' => [
-                    'controller' => 'Users',
-                    'action'     => 'forbidden'
+                'unauthorizedRedirect' => [
+                    'controller' => 'Connexion',
+                    'action'     => 'index'
                 ],
-                'loginRedirect'        => [
+                /*'loginRedirect'        => [
                     'controller' => 'Dashboards',
                     'action'     => 'index'
                 ],
@@ -78,8 +78,12 @@ class AppController extends Controller
               ],*/
             ]);
 
-                 $this->Auth->allow(['index', 'food', 'drinks', 'googlelogin', 'logout', 'connect', 'getDrinks', 'getWeather', 'getSeries','home']);
 
+                if(null !== $this->request->session()->read('firstName') ){
+                     $this->Auth->allow(['getActivities','index', 'food', 'drinks', 'googlelogin', 'logout', 'connect', 'getDrinks', 'getWeather', 'getSeries','home']);
+                }else{
+                     $this->Auth->allow(['/connexion/index','connexion', 'googlelogin', 'connect', 'home']);
+                }
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see http://book.cakephp.org/3.0/en/controllers/components/security.html

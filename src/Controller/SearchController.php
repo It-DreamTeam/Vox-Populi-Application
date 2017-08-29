@@ -2,45 +2,35 @@
 
 namespace App\Controller;
 
-
 use \Cake\Network\Exception;
 use Cake\Event\Event;
 use Cake\Utility\Text;
 use Google_Client;
 use Google_Service_Oauth2;
-
-
 use Cake\Http\Client;
 use Cake\ORM\TableRegistry;
 use App\Model\Entity\User;
 use \Cake\ORM\Entity;
-
 define('GOOGLE_OAUTH_CLIENT_ID', '724346200475-sj3iure20vb2mse5m6ogjtsg9kb5qma2.apps.googleusercontent.com');
 define('GOOGLE_OAUTH_CLIENT_SECRET', 'Vf5JkHeTmcXUxQHyJFVfNro9');
 define('GOOGLE_OAUTH_REDIRECT_URI', 'http://www.moodify.com/search');
 
 use Cake\Datasource\ConnectionManager;
 
-
-
 class SearchController extends AppController
 {
 
   public function index(){
-
     $client = new Google_Client();
-
     /* Création de notre client Google */
                 $client->setClientId(GOOGLE_OAUTH_CLIENT_ID);
                 $client->setClientSecret(GOOGLE_OAUTH_CLIENT_SECRET);
                 $client->setRedirectUri(GOOGLE_OAUTH_REDIRECT_URI);
-
                 $client->setScopes(array(
                     "https://www.googleapis.com/auth/userinfo.profile",
                     'https://www.googleapis.com/auth/userinfo.email'
                 ));
                 $client->setApprovalPrompt('auto');
-
     /* si dans l'url le paramètre de retour Google contient 'code' */
                 if (isset($this->request->query['code'])) {
     // Alors nous authentifions le client Google avec le code reçu
@@ -61,18 +51,12 @@ class SearchController extends AppController
     // et nous récupérons les informations de l'utilisateur connecté
                     $user = $oauth2->userinfo->get();
                   try {
-
                         if (!empty($user)) {
-
     // si l'utilisateur est bien déclaré, nous vérifions si dans notre table Users il existe l'email de l'utilisateur déclaré ou pas
-
                         $users_table = TableRegistry::get('users');
-
                         $result = $users_table->find('all')
                                                ->where(['email' => $user['email']])
                                                ->first();
-
-
                             if ($result) {
     // si l'email existe alors nous déclarons l'utilisateur comme authentifié sur CakePHP
                                 $this->Auth->setUser($result->toArray());
@@ -87,7 +71,6 @@ class SearchController extends AppController
                                 $data['avatar'] = $user['picture'];
                                 $data['link'] = $user['link'];
                                 $data['uuid'] = Text::uuid();
-
                                 $entity = $users_table->newEntity($data);
                                 if ($users_table->save($entity)) {
     // et ensuite nous déclarons l'utilisateur comme authentifié sur CakePHP
@@ -109,9 +92,7 @@ class SearchController extends AppController
                         return $this->redirect(['controller' => 'Connexion', "action" => "index"]);
                     }
                 }
-
   }
-
 
   public function getDrinks() {
     $http = new Client();
@@ -173,7 +154,6 @@ class SearchController extends AppController
         $taste = "sweet";
         break;
     }
-
   if($_POST['temperature'] >= "28"){
     if($_POST['date'] >= "05" && $_POST['date'] <= "17"){
       $date = "afternoon";
@@ -187,7 +167,6 @@ class SearchController extends AppController
     $urlNotAlcohol = "http://addb.absolutdrinks.com/drinks/not/alcoholic/tasting/" . $taste . "/for/". $date. "/with/ice-cubes?apiKey=328da11a6e5144929f6bf83e1dc9e5da";
     $urlAlcohol = "http://addb.absolutdrinks.com/drinks/alcoholic/tasting/" . $taste . "/for/". $date. "/with/ice-cubes?apiKey=328da11a6e5144929f6bf83e1dc9e5da";
   }else{
-
     if($_POST['date'] >= "05" && $_POST['date'] <= "17"){
       $date = "afternoon";
     }else if($_POST['date'] >= "17" && $_POST['date'] <= "19"){
@@ -197,53 +176,49 @@ class SearchController extends AppController
     }else if($_POST['date'] >= "21" && $_POST['date'] <= "05"){
       $date = "evening";
     }
-
     $urlNotAlcohol = "http://addb.absolutdrinks.com/drinks/not/alcoholic/tasting/" . $taste . "/for/". $date. "?apiKey=328da11a6e5144929f6bf83e1dc9e5da";
     $urlAlcohol = "http://addb.absolutdrinks.com/drinks/alcoholic/tasting/" . $taste . "/for/". $date. "?apiKey=328da11a6e5144929f6bf83e1dc9e5da";
   }
-
   $responseAlcohol = $http->get($urlAlcohol);
   $responseNotAlcohol = $http->get($urlNotAlcohol);
-
   $nbAlcohol = count($responseAlcohol->json['result']) - 1 ;
   $nbNotAlcohol = count($responseNotAlcohol->json['result']) - 1;
-
   $nAlcohol = rand(0,$nbAlcohol );
   $nNotAlcohol = rand(0,$nbNotAlcohol);
-
   $alcohol = $responseAlcohol->json['result'][$nAlcohol];
   $notalcohol = $responseNotAlcohol->json['result'][$nNotAlcohol];
-
   $res = array();
   array_push($res, $alcohol, $notalcohol);
   die(json_encode($res));
   }
 
-
   public function getSeries(){
     $http = new Client();
     $url ="http://api.betaseries.com/shows/random?nb=100&key=cb1d200d4a43";
     $responseSerie = $http->get($url);
-
     $nbSeries = count($responseSerie->json['shows']);
     $nSeries= rand(0, $nbSeries );
     die(json_encode($responseSerie->json['shows'][$nSeries]));
   }
 
-
   public function getWeather() {
-
   }
 
   public function home() {
-
   }
 
   public function food(){
-
   }
 
   public function drinks(){
+  }
 
+  public function getActivities(){
+    $temp = $_POST["temp"];
+    $activity_table = TableRegistry::get('Activity');
+    $result = $activity_table->find('all')
+                           ->where(['weather' => $temp])
+                           ->toArray();
+    die(json_encode($result));
   }
 }

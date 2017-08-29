@@ -1,7 +1,7 @@
 <?php $this->assign('title', "Résultats"); ?>
 <?=$this->Html->script('jquery-3.2.1');?>
 <?=$this->Html->css('style');?>
-<?=$this->Html->css('app1');?>
+<?=$this->Html->css('app');?>
 
 <header>
     <div class="weather row center-lg center-xs">
@@ -11,9 +11,9 @@
         <div class="col-lg-6 col-xs-6">
             <div class="review">
                 <?=$this->Html->image('weather/raindrop.png');?>
-                <span>Humidity</span>
+                <span id="humidity">Humidity</span>
                 <?=$this->Html->image('weather/wind.png');?>
-                <span>Wind</span>
+                <span id="wind">Wind</span>
             </div>
         </div>
         <div class="col-lg-6 col-xs-6 temp-wrap">
@@ -38,15 +38,15 @@
                 <?=$this->Html->image('food/chicken.png');?><br>
                 <span>Food</span>
             </label>
-            <div class="tab-content">
-                AQUI LA COMIDA!!
+            <div class="tab-content food">
+
             </div>
         </div>
         <input type="radio" name="tabs" id="drinks">
         <div class="tab-label-content" id="tab2-content">
             <label for="drinks">
                 <?=$this->Html->image('drinks/glass.png');?>
-                <span>Food</span>
+                <span>Drinks</span>
             </label>
             <div class="tab-content">
                 <div id='real'>
@@ -65,7 +65,8 @@
                 <?=$this->Html->image('activities/activities.png');?> <br>
                 <span>Activities</span>
             </label>
-            <div class="tab-content">Here on propose une activité selon la météo, if --> fait beau alors on les envoie dors, else --> on propose de lire un livre regarder des films, bref</div>
+            <div class="tab-content activites">
+            </div>
         </div>
         <input type="radio" name="tabs" id="movies">
         <div class="tab-label-content" id="tab4-content">
@@ -100,3 +101,4 @@
 
 <?=$this->Html->script('app');?>
 <?=$this->Html->script('api_ville_meteo');?>
+<?=$this->Html->script('recognition');?>

@@ -11,7 +11,7 @@ $( document ).ready(function() {
         $('#result_city').append(data);
         if (data.current_condition != undefined) {
 
-
+console.log(data.current_condition)
 
                     /*  $.ajax({
                         type: "POST",
@@ -29,7 +29,7 @@ $( document ).ready(function() {
                       })*/
 
 
-
+				 /* DRINKS -------------------------------------------------------------------------- */
 											var date1 = new Date()
 									 $.ajax({
 										 type: "POST",
@@ -53,13 +53,77 @@ $( document ).ready(function() {
 				 /* ------------------------------------------------------------------------------- */
 
 
+				 /* FOOD -------------------------------------------------------------------------- */
+
+				 var proxy = 'https://cors-anywhere.herokuapp.com/';
+				 $.ajax({
+					 type: "POST",
+					 url: proxy +  "http://food2fork.com/api/search ",
+					 headers: {
+						 "Authorization": "Token 0efc9be2a4e068ccf5dac603d0467bad2776e72d",
+					 },
+					 data: {
+						 "key" : "1db14a055d0691b833f56085dfd7eb57",
+						 "Accept": "application/json",
+					 },
+					 dataType: "json",
+					 success: function(data) {
+						 var recipes = data.recipes
+						 var arrayRecipes = []
+						 for(var i = 0; i < 3 ; i++){
+							 var item = recipes[Math.floor(Math.random()*recipes.length)];
+							 arrayRecipes.push(item)
+						 }
+
+						   for(var i=0; i < arrayRecipes.length; i++){
+						     var recipeId = arrayRecipes[i].recipe_id
+						     var proxy = 'https://cors-anywhere.herokuapp.com/';
+						     $.ajax({
+						         type: "POST",
+						         url: proxy + "http://food2fork.com/api/get",
+						         dataType: "json",
+						         headers: {
+						           "Authorization": "Token 0efc9be2a4e068ccf5dac603d0467bad2776e72d",
+						         },
+						         data: {
+						           "key" : "1db14a055d0691b833f56085dfd7eb57",
+						           "rId": recipeId,
+						           "Accept": "application/json",
+						         },
+						         success: function(data) {
+
+						           var str = "<img src='"+ data.recipe.image_url + "' /> ";
+						           $(".tab-content.food").append('<div id=\'recipe_'+data.recipe.recipe_id+'\'>');
+						           $(".tab-content.food").append(' <h3> ' + data.recipe.title +'</h3>')
+						           $('.tab-content.food').append(' <img style="height: 250px; width: 250px" id="'+ i +'"src="' + data.recipe.image_url + '" />')
+						           var ingredients = ""
+						           for(var ing=0; ing<data.recipe.ingredients.length; ing++){
+						              ingredients += "<br> " + data.recipe.ingredients[ing]
+						           }
+						           $(".tab-content.food").append('<p> ' + ingredients +'</p>')
+						           $(".tab-content.food").append('<a href="'+data.recipe.source_url + '" >Voir la recette complète </a>')
+						           $(".tab-content.food").append("</div>")
+						         },
+						         error: function() {
+						           console.log("Internal Server Error");
+						         }
+						       })
+						   }
+
+					 },
+					 error : function (err){
+						 console.log("FOOD ERROR : ", err)
+					 }
+				 })
+				 /* ------------------------------------------------------------------------------- */
+
+
 				 /* SERIES  ----------------------------------------------------------------------- */
 									 $.ajax({
 										 type: "GET",
 										 url: "/search/getSeries",
 										 dataType: "json",
 										 success: function(data) {
-											 console.log(data)
 											 $('#serie').html( data.title)
 											 $('#SDescription').html(data.description)
 											 var img = new Image()
@@ -72,13 +136,66 @@ $( document ).ready(function() {
 											 console.log("series ERROR : ", err)
 										 }
 									 })
-
 				 /* ------------------------------------------------------------------------------- */
 
 
+				 /* ACTIVITIES  ----------------------------------------------------------------------- */
+				 var tempe = data.current_condition.condition_key
+									 $.ajax({
+										 type: "POST",
+										 url: "/search/getActivities",
+										 dataType: "json",
+										 data: {
+											 "temp" : data.current_condition.condition_key
+										 },
+										 success: function(data) {
+ 										 		$(".tab-content.activites").append('<h2 style="text-align: center;"> Nous vous proposons ses activités qui sont en accord avec cette journée '+ tempe +'</h2>')
+											 for(var act=0; act<data.length; act++){
+												 $(".tab-content.activites").append('<p> ' + data[act].name +'</p>')
+						           }
+
+										 },
+										 error : function (err){
+											 console.log("ACTIVITIES ERROR : ", err)
+										 }
+									 })
+				 /* ------------------------------------------------------------------------------- */
 
           $('#name_ville').html(data.city_info.name);
           $('#temperature_ville').html(data.current_condition.tmp+"<span> °c</span>");
+					$('#summary').html(data.current_condition.condition)
+					var dt = new Date();
+					var time = dt.getHours() + ":" + dt.getMinutes();
+
+					$('.time').html(time)
+					$('#humidity').html(data.current_condition.humidity+"%")
+					switch (data.current_condition.wnd_dir) {
+						case "N":
+							$('#wind').html(data.current_condition.wnd_spd+"km/h ↑")
+							break;
+						case "S":
+							$('#wind').html(data.current_condition.wnd_spd+"km/h ↓")
+							break;
+						case "E":
+							$('#wind').html(data.current_condition.wnd_spd+"km/h →")
+							break;
+						case "O":
+							$('#wind').html(data.current_condition.wnd_spd+"km/h ←")
+							break;
+						case "NE":
+							$('#wind').html(data.current_condition.wnd_spd+"km/h ↗")
+							break;
+						case "NO":
+							$('#wind').html(data.current_condition.wnd_spd+"km/h ↖")
+							break;
+						case "SE":
+							$('#wind').html(data.current_condition.wnd_spd+"km/h ↘")
+							break;
+						case "SO":
+							$('#wind').html(data.current_condition.wnd_spd+"km/h ↙")
+							break;
+					}
+
 
           switch (data.current_condition.condition_key) {
             case "ensoleille":

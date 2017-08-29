@@ -53,7 +53,8 @@ class ConnexionController extends AppController
         }else{
           $this->Auth->setUser($result->toArray());
           $this->request->session()->write('firstName', $result["firstname"]);
-          $this->redirect(['controller' => 'search', 'action' => 'index']);
+        
+         $this->redirect(['controller' => 'search', 'action' => 'index']);
         }
       }else{
           $this->Flash->set('You should first sign up.', ['element' => 'error']);
