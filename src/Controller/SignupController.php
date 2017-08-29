@@ -32,7 +32,8 @@ class SignupController extends AppController
           $this->request->session()->write('firstName', $data["firstname"]);
           $this->redirect(['controller' => 'Search', 'action' => 'index']);
       } else {
-          $this->Flash->set('Erreur d\'inscription');
+          $this->Flash->set('Erreur d\'inscription - Adresse mail déjà utilisée.. ');
+          $this->redirect(['controller' => 'Search', 'action' => 'index']);
       }
 
     }

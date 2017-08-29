@@ -85,9 +85,11 @@
         <div class="slide"></div>
     </div>
 
+
+
     <div class="sticky-input">
         <div class="effectwrap">
-            <input class="effect-9" type="text" placeholder="Placeholder Text">
+            <input class="tot effect-9" id="input" type="text" placeholder='Dite "Météo à" + nom de la ville !'></input>
             <span class="focus-border">
         <i></i>
         </span>
@@ -97,6 +99,9 @@
             </div>
         </div>
     </div>
+
+
+
 </div>
 
 <?=$this->Html->script('app');?>

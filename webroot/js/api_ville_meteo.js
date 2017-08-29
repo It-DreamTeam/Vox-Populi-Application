@@ -140,7 +140,7 @@ console.log(data.current_condition)
 
 
 				 /* ACTIVITIES  ----------------------------------------------------------------------- */
-				 var tempe = data.current_condition.condition_key
+				 var tempe = data.current_condition.condition
 									 $.ajax({
 										 type: "POST",
 										 url: "/search/getActivities",

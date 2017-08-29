@@ -75,6 +75,7 @@ function updateRec() {
 function send() {
   var text = $("#input").val();
 
+console.log(text)
 if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("Météo") >= 0 ||text.toLowerCase().indexOf("meteo") >= 0 || text.toLowerCase().indexOf("Meteo") >= 0){
 // METEO API
 
