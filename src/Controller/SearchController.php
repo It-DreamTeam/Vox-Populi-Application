@@ -98,7 +98,7 @@ class SearchController extends AppController
       debug("nulll");
       $this->redirect(['controller' => 'connexion', 'action' => 'index']);
     }
-    
+
 
   }
 
@@ -219,6 +219,9 @@ class SearchController extends AppController
   }
 
   public function drinks(){
+  }
+
+  public function betaseries(){
   }
 
   public function getActivities(){

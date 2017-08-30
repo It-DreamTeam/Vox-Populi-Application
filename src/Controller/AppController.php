@@ -80,7 +80,7 @@ class AppController extends Controller
 
 
                 if(null !== $this->request->session()->read('firstName') ){
-                     $this->Auth->allow(['getActivities', '/Search/index','index', 'home', 'food', 'drinks', 'googlelogin', 'logout', 'connect', 'getDrinks', 'getWeather', 'getSeries','home']);
+                     $this->Auth->allow(['betaseries', 'getActivities', '/Search/index','index', 'home', 'food', 'drinks', 'googlelogin', 'logout', 'connect', 'getDrinks', 'getWeather', 'getSeries','home']);
                 }else{
                      $this->Auth->allow(['index', 'connexion', 'googlelogin', 'connect']);
                 }

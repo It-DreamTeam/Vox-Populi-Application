@@ -75,10 +75,8 @@ function updateRec() {
 function send() {
   var text = $("#input").val();
 
-console.log(text)
 if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("Météo") >= 0 ||text.toLowerCase().indexOf("meteo") >= 0 || text.toLowerCase().indexOf("Meteo") >= 0){
-// METEO API
-
+// --------------------------- METEO API -----------------------------
   $.ajax({
       type: "POST",
       url: baseUrl + "query?v=20150910",
@@ -95,8 +93,8 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
         say = data.result.fulfillment.speech;
         synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(say);
-        //utterThis.lang = "en-US";
         synth.speak(utterThis);
+
           if(data.result) {
   					setInput2(data.result.parameters.geocityfr);
             geocityfr = data.result.parameters.geocityfr;
@@ -111,7 +109,11 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
         console.log("Internal Server Error");
       }
     });
+
 }else if(text.toLowerCase().indexOf("je veux une boisson") >= 0){
+  // -------------------------------------- DRINKS ----------------------------------------------
+
+  //Get the taste of the drinks that the user had research
   $.ajax({
       type: "POST",
       url: baseUrl + "query?v=20150910",
@@ -123,6 +125,7 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
       data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
       success: function(data) {
         text = data.result.parameters.taste
+
         var say = "";
         say = data.result.fulfillment.speech;
         synth = window.speechSynthesis;
@@ -136,6 +139,7 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
             url: proxy + "http://addb.absolutdrinks.com/drinks/not/alcoholic/tasting/" + text +"?apiKey=328da11a6e5144929f6bf83e1dc9e5da",
             success: function(data) {
               var datasNA = data
+
               //ALCOHOL
               $.ajax({
                   type: "GET",
@@ -157,6 +161,53 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
               console.log("Internal Server Error");
             }
           });
+      },
+      error: function() {
+        console.log("Internal Server Error");
+      }
+    })
+
+}else if(text.toLowerCase().indexOf("donne-moi la sortie des prochains films") >= 0 ){
+
+// ------------------------ UPCOMING MOVIES -----------------------------
+  $.ajax({
+      type: "POST",
+      url: baseUrl + "query?v=20150910",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      headers: {
+        "Authorization": "Bearer " + accessToken
+      },
+      data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+      success: function(data) {
+        text = data.result.parameters.upcomingMovies
+        var say = "";
+        say = data.result.fulfillment.speech;
+        synth = window.speechSynthesis;
+        var utterThis = new SpeechSynthesisUtterance(say);
+        synth.speak(utterThis);
+
+          $.ajax({
+              type: "GET",
+              url: "http://api.betaseries.com/movies/discover?key=cb1d200d4a43",
+              data: {
+                "type": "upcoming"
+              },
+              success: function(data) {
+                var moviesUpcomingSelected = []
+                for(let mov=0; mov < 4; mov++){
+                    var item = data.movies[Math.floor(Math.random()*data.movies.length)];
+                    moviesUpcomingSelected.push(item)
+                }
+                localStorage.setItem("TVSpeech", "upcomingFilms");
+                localStorage.setItem("TVRSpeech", JSON.stringify(moviesUpcomingSelected));
+                window.location = '/search/betaseries';
+              },
+              error: function() {
+                console.log("Internal Server Error");
+              }
+            })
+        
 
 
 
@@ -166,9 +217,79 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
       }
     })
 
+}else if(text.toLowerCase().indexOf("je veux regarder") >= 0 || text.toLowerCase().indexOf("Je veux regarder") >= 0 ){
+
+// ---------------------------------- BETASERIES -----------------------------------
+$.ajax({
+    type: "POST",
+    url: baseUrl + "query?v=20150910",
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    headers: {
+      "Authorization": "Bearer " + accessToken
+    },
+    data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
+    success: function(data) {
+      text = data.result.parameters.typeTV
+      var say = "";
+      say = data.result.fulfillment.speech;
+      synth = window.speechSynthesis;
+      var utterThis = new SpeechSynthesisUtterance(say);
+      synth.speak(utterThis)
+      localStorage.setItem("TVSpeech",text)
+
+      if(text == "film"){
+        // ----------- MOVIES ---------------------
+        $.ajax({
+            type: "GET",
+            url: "http://api.betaseries.com/movies/discover?key=cb1d200d4a43",
+            data: {
+              "type": "popular"
+            },
+            success: function(data) {
+              var moviesSelected = []
+              for(let mov=0; mov < 4; mov++){
+                  var item = data.movies[Math.floor(Math.random()*data.movies.length)];
+                  moviesSelected.push(item)
+              }
+              localStorage.setItem("TVRSpeech", JSON.stringify(moviesSelected));
+              window.location = '/search/betaseries';
+            },
+            error: function() {
+              console.log("Internal Server Error");
+            }
+          })
+      }else if(text == "serie" || text == "série"){
+        // ------------------------- SERIES -----------------------
+        $.ajax({
+            type: "GET",
+            url: "http://api.betaseries.com/shows/discover?key=cb1d200d4a43",
+            success: function(data) {
+              var seriesSelected = []
+              for(let mov=0; mov < 4; mov++){
+                  var item = data.shows[Math.floor(Math.random()*data.shows.length)];
+                  seriesSelected.push(item)
+              }
+              localStorage.setItem("TVRSpeech", JSON.stringify(seriesSelected));
+              window.location = '/search/betaseries';
+            },
+            error: function() {
+              console.log("Internal Server Error");
+            }
+          })
+      }
+
+    },
+    error: function() {
+      console.log("Internal Server Error");
+    }
+  })
+
 }else{
 
 if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().indexOf("Je veux mangé") >= 0 ){
+// ------------------------------------ FOOD -------------------------------------
+
   $.ajax({
       type: "POST",
       url: baseUrl + "query?v=20150910",
@@ -188,7 +309,7 @@ if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().index
         synth.speak(utterThis);
 
 
-        // FOOD API
+        // ---------------------------- FOOD API ---------------------------------------------------------
           $.ajax({
               type: "GET",
               url: proxy + "http://food2fork.com/api/search",
@@ -240,14 +361,13 @@ if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().index
                 console.log("Internal Server Error");
               }
             });
-
       },
       error: function() {
         console.log("Internal Server Error");
       }
     })
 }else{
-  // FOOD API
+  // --------------------------- FOOD API ---------------------------------------
     $.ajax({
         type: "GET",
         url: proxy + "http://food2fork.com/api/search",
@@ -280,16 +400,13 @@ if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().index
                 for(var i = 0; i < 4; i++){
                   var item = recipes[Math.floor(Math.random()*recipes.length)];
                   newItem.push(item)
-
                   if(jQuery.inArray(item, newItem )){
-
                     item = recipes[Math.floor(Math.random()*recipes.length)];
                     array.push(item)
                   }else{
                     array.push(item)
                   }
                 }
-                console.log(array)
               }
 
               localStorage.setItem("foodData", JSON.stringify(array));
