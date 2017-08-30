@@ -46,21 +46,23 @@ class ConnexionController extends AppController
        $result = $users_table->find('all')
                               ->where(['email' => $data['email'], 'password' => $data['password']])
                               ->first();
-      if($result){
+
+        if($result){
         if($result['avatar'] != null){
           $this->Flash->set('Vous êtes un utilisateur Google', ['element' => 'error']);
           $this->redirect(['controller' => 'connexion', 'action' => 'index']);
         }else{
           $this->Auth->setUser($result->toArray());
           $this->request->session()->write('firstName', $result["firstname"]);
-
-         $this->redirect(['controller' => 'search', 'action' => 'index']);
+          $this->redirect(['controller' => 'search', 'action' => 'index']);
         }
       }else{
-          $this->Flash->set('Vous devez d\'abord vous inscrire', ['element' => 'error']);
+          $this->Flash->set('Utilisateur inconnu. Inscrivez-vous', ['element' => 'error']);
           //$this->redirect(['controller' => 'signup', 'action' => 'index']);
           $this->redirect(['controller' => 'connexion', 'action' => 'index']);
+
       }
+
      }
    }
 }

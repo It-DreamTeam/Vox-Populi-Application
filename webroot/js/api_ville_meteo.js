@@ -11,24 +11,6 @@ $( document ).ready(function() {
         $('#result_city').append(data);
         if (data.current_condition != undefined) {
 
-console.log(data.current_condition)
-
-                    /*  $.ajax({
-                        type: "POST",
-                        url: "search/getWeather",
-                        dataType: "json",
-                        data: {
-                          city: result
-                        },
-                        success: function(data) {
-                            console.log("tititit")
-                        },
-                        error: function(err){
-                          console.log("louhlh")
-                        }
-                      })*/
-
-
 				 /* DRINKS -------------------------------------------------------------------------- */
 											var date1 = new Date()
 									 $.ajax({
@@ -93,16 +75,11 @@ console.log(data.current_condition)
 						         success: function(data) {
 
 						           var str = "<img src='"+ data.recipe.image_url + "' /> ";
-						           $(".tab-content.food").append('<div id=\'recipe_'+data.recipe.recipe_id+'\'>');
-						           $(".tab-content.food").append(' <h3> ' + data.recipe.title +'</h3>')
-						           $('.tab-content.food').append(' <img style="height: 250px; width: 250px" id="'+ i +'"src="' + data.recipe.image_url + '" />')
 						           var ingredients = ""
 						           for(var ing=0; ing<data.recipe.ingredients.length; ing++){
 						              ingredients += "<br> " + data.recipe.ingredients[ing]
 						           }
-						           $(".tab-content.food").append('<p> ' + ingredients +'</p>')
-						           $(".tab-content.food").append('<a href="'+data.recipe.source_url + '" >Voir la recette complète </a>')
-						           $(".tab-content.food").append("</div>")
+											 $(".tab-content.food").append('<div class="col-lg-4 col-xs-6" id=\'recipe_'+data.recipe.recipe_id+'\'>  <h3> ' + data.recipe.title +'</h3> <a href="'+data.recipe.source_url + '" >Voir la recette complète </a>  <br> <img style="height: 250px; width: 250px" id="'+ i +'"src="' + data.recipe.image_url + '" /> <p> ' + ingredients +'</p>  </div>')
 						         },
 						         error: function() {
 						           console.log("Internal Server Error");
@@ -199,7 +176,10 @@ console.log(data.current_condition)
 
           switch (data.current_condition.condition_key) {
             case "ensoleille":
+							weather = "sun-1"
+							break;
             case "eclaircies":
+						case "ciel-voile":
             case "stratus-se-dissipant":
               weather = "sun";
               break;
@@ -212,16 +192,16 @@ console.log(data.current_condition)
             case "nuit-avec-developpement-nuageux":
             case "nuit-faiblement-orageuse":
             case "nuit-avec-averses-de-neige-faible":
-
-                weather = "night";
+                weather = "moon";
                 break;
-            case "ciel-voile":
-            case "faiblement-nuageux":
-            case "stratus":
-            case "brouillard":
-            case "fortement-nuageux":
-            case "faibles-passages-nuageux":
-            case "developpement-nuageux":
+						case "brouillard":
+						case "fortement-nuageux":
+						case "faibles-passages-nuageux":
+						case "developpement-nuageux":
+					  case "faiblement-nuageux":
+						case "stratus":
+							weather = "clouds";
+							break;
             case "nuit-faiblement-orageuse":
             case "nuit-avec-averses-de-neige-faible":
                 weather = "wind";
@@ -229,7 +209,7 @@ console.log(data.current_condition)
             case "faiblement-orageux":
             case "orage-modere":
             case "fortement-orageux":
-                weather = "thunder";
+                weather = "lightning-1";
                 break;
             case "averses-de-pluie-faible":
             case "averses-de-pluie-moderee":
@@ -238,23 +218,24 @@ console.log(data.current_condition)
             case "pluie-faible":
             case "pluie-forte":
             case "pluie-moderee":
-            case "pluie-et-neige-melee-faible":
-            case "pluie-et-neige-melee-moderee":
-            case "pluie-et-neige-melee-forte":
               weather = "rain";
-                break;
-
+              break;
+						case "pluie-et-neige-melee-faible":
+						case "pluie-et-neige-melee-moderee":
+						case "pluie-et-neige-melee-forte":
+							weather = "hail";
+							break;
             case "averses-de-neige-faible":
             case "neige-faible":
             case "neige-moderee":
             case "neige-forte":
               weather = "snow";
-                break;
-
+              break;
             default:console.log("Error de condition_key")
 
           }
-            $('#summary img').attr('src', '/img/weather/' + weather + '.svg');
+
+					$('#imgS').attr('src', '/img/weather/' + weather + '.svg');
         }else {
             alert("Ville non française");
         }

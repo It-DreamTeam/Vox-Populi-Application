@@ -6,7 +6,7 @@
 <header>
     <div class="weather row center-lg center-xs">
         <div class="col-lg-6 col-xs-6">
-            <div id="summaryy" class="w-icons"><?=$this->Html->image('weather/sun.svg');?></div>
+            <div id="summaryy" class="w-icons"><img src="" id="imgS"> </img></div>
         </div>
         <div class="col-lg-6 col-xs-6">
             <div class="review">
@@ -36,9 +36,9 @@
         <div class="tab-label-content" id="tab1-content">
             <label for="food">
                 <?=$this->Html->image('food/chicken.png');?><br>
-                <span>Food</span>
+                <span>Nourriture</span>
             </label>
-            <div class="tab-content food">
+            <div class="tab-content food" style="width: 100%; display: flex;">
 
             </div>
         </div>
@@ -46,15 +46,15 @@
         <div class="tab-label-content" id="tab2-content">
             <label for="drinks">
                 <?=$this->Html->image('drinks/glass.png');?>
-                <span>Drinks</span>
+                <span>Boissons</span>
             </label>
-            <div class="tab-content">
-                <div id='real'>
-                    <h2>Alcoholic drink <div id="drinksA"></div> </h2>
+            <div class="tab-content drinks" style="<width: 100%; display: flex;">
+                <div id='real' class="col-lg-8 col-xs-6">
+                    <h2>Boisson alcoolisée <div id="drinksA"></div> </h2>
                     <iframe width="450" height="300" id="videoA" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <div id='big'>
-                    <h2>Soft drink <div id="drinksNA"> </div> </h2>
+                <div id='big' class="col-lg-8 col-xs-6">
+                    <h2>Boisson non alcoolisée <div id="drinksNA"> </div> </h2>
                     <iframe width="450" height="300" id="videoNA"frameborder="0" allowfullscreen></iframe>
                 </div>
             </div>
@@ -63,7 +63,7 @@
         <div class="tab-label-content" id="tab3-content">
             <label for="activities">
                 <?=$this->Html->image('activities/activities.png');?> <br>
-                <span>Activities</span>
+                <span>Activités</span>
             </label>
             <div class="tab-content activites">
             </div>
@@ -72,7 +72,7 @@
         <div class="tab-label-content" id="tab4-content">
             <label for="movies">
                 <?=$this->Html->image('movies/old-television.png');?> <br>
-                <span>Movies &amp; series</span>
+                <span>Films &amp; s"ries</span>
             </label>
             <div class="tab-content">
                 <section id='steezy'>
@@ -86,6 +86,8 @@
     </div>
 
 
+
+    <div style="width: 100%; position: fixed; bottom: 0; z-index: 2; text-align: center;" id="openResearch"> <img  style="width: 40px;" src="/img/1.svg"> </img> </div>
 
     <div class="sticky-input">
         <div class="effectwrap">
@@ -107,3 +109,36 @@
 <?=$this->Html->script('app');?>
 <?=$this->Html->script('api_ville_meteo');?>
 <?=$this->Html->script('recognition');?>
+
+
+<script>
+$(".sticky-input").hide()
+
+$('#openResearch').on('click', function(){
+  if($(".sticky-input").is(":visible")){
+    $(".sticky-input").hide()
+    $("#openResearch img").css({'transform': 'rotate(0deg)'});
+  }else{
+    $(".sticky-input").show()
+    $("#openResearch img").css({'transform': 'rotate(-180deg)'});
+  }
+})
+
+$('.tab-content.drinks').hide()
+$("#tab1-content").on('click', function(){
+  $('.tab-content.food').show()
+  $('.tab-content.drinks').hide()
+})
+$("#tab2-content").on('click', function(){
+  $('.tab-content.food').hide()
+  $('.tab-content.drinks').show()
+})
+$("#tab3-content").on('click', function(){
+  $('.tab-content.food').hide()
+  $('.tab-content.drinks').hide()
+})
+$("#tab4-content").on('click', function(){
+  $('.tab-content.food').hide()
+  $('.tab-content.drinks').hide()
+})
+</script>

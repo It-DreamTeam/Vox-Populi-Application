@@ -11,6 +11,15 @@ $(document).ready(function() {
   var drinkA = JSON.parse(localStorage.getItem("drinkA"))
   var drinkNA = JSON.parse(localStorage.getItem("drinkNA"))
 
+  var say = "";
+  say = drinkNA.name
+  synth = window.speechSynthesis;
+  var utterThis = new SpeechSynthesisUtterance(say);
+  synth.speak(utterThis);
+  var say2 = drinkA.name
+  var utterThis2 = new SpeechSynthesisUtterance(say2);
+  synth.speak(utterThis2);
+
   $("#drinks").append('<h2>'+  drinkNA.name +'</h2>');
   $("#drinks").append('<iframe width="450" height="300" id="videoA"src="https://www.youtube.com/embed/'+drinkNA.videos[0].video +'" frameborder="0" allowfullscreen></iframe>');
   $("#drinks").append('<h2>'+  drinkA.name +'</h2>');

@@ -12,7 +12,7 @@
 <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
 
 
-<a style="color: black;" href="/connexion/logout"> Déconnexion </a>
+<a href="/connexion/logout"> Déconnexion </a>
 
 <div class="row center-xs logo">
     <div class="col-xs-6">
@@ -21,7 +21,7 @@
             <div class="">
                 <h1>Moodify app</h1>
             </div>
-            <h1 style="text-align: center; font-family: 'Indie Flower', cursive; font-size: 4em;" > Hello <?= $this->request->session()->read('firstName') ?></h1>
+            <h1 style="text-align: center; font-family: 'Indie Flower', cursive; font-size: 4em;" > Bonjour <?= $this->request->session()->read('firstName') ?></h1>
         </div>
     </div>
 </div>

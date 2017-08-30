@@ -40,17 +40,17 @@
 
 
          <?= $this->Form->create(null, array('url' => ['controller' => 'Signup', 'action' => 'index'], 'class'=>'form-signup', 'id'=>'form_signup')); ?>
-           <label for="firstname">First name</label>
-           <input class="form-styling" type="text" name="firstname" placeholder=""/>
-           <label for="lastname">Last name</label>
+           <label for="lastname">Nom</label>
            <input class="form-styling" type="text" name="lastname" placeholder=""/>
+           <label for="firstname">Prénom</label>
+           <input class="form-styling" type="text" name="firstname" placeholder=""/>
            <label for="email">Email</label>
            <input class="form-styling" type="text" name="email" placeholder=""/>
-           <label for="password">Password</label>
+           <label for="password">Mot de passe</label>
            <input class="form-styling" type="text" name="password" placeholder=""/>
-           <?= $this->Form->button(__('Sign Up'), ['class' => 'btn-signup']) ?>
+           <?= $this->Form->button(__('S\'inscrire'), ['class' => 'btn-signup']) ?>
    			<?= $this->Form->end(); ?>
 
-        
+
   </div>
 </div>
