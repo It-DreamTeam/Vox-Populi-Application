@@ -12,7 +12,7 @@ $( document ).ready(function() {
         if (data.current_condition != undefined) {
 
 				 /* DRINKS -------------------------------------------------------------------------- */
-											var date1 = new Date()
+									var date1 = new Date()
 									 $.ajax({
 										 type: "POST",
 										 url: "/search/getDrinks",
@@ -23,6 +23,7 @@ $( document ).ready(function() {
 												 "date": date1.getHours(),
 										 },
 										 success: function(data) {
+											 console.log(data)
 											 $('#drinksA').html(data[0].name)
 											 $('#videoA').attr('src',"https://www.youtube.com/embed/"+ data[0].videos[0].video)
 											 $('#drinksNA').html(data[1].name)
@@ -41,15 +42,13 @@ $( document ).ready(function() {
 				 $.ajax({
 					 type: "POST",
 					 url: proxy +  "http://food2fork.com/api/search ",
-					 headers: {
-						 "Authorization": "Token 0efc9be2a4e068ccf5dac603d0467bad2776e72d",
-					 },
 					 data: {
-						 "key" : "1db14a055d0691b833f56085dfd7eb57",
+						 "key" : "3b43a2756e396e825d5a2bb283e727df",
 						 "Accept": "application/json",
 					 },
 					 dataType: "json",
 					 success: function(data) {
+						 console.log()
 						 var recipes = data.recipes
 						 var arrayRecipes = []
 						 for(var i = 0; i < 3 ; i++){
@@ -64,16 +63,12 @@ $( document ).ready(function() {
 						         type: "POST",
 						         url: proxy + "http://food2fork.com/api/get",
 						         dataType: "json",
-						         headers: {
-						           "Authorization": "Token 0efc9be2a4e068ccf5dac603d0467bad2776e72d",
-						         },
 						         data: {
-						           "key" : "1db14a055d0691b833f56085dfd7eb57",
+						           "key" : "3b43a2756e396e825d5a2bb283e727df",
 						           "rId": recipeId,
 						           "Accept": "application/json",
 						         },
 						         success: function(data) {
-
 						           var str = "<img src='"+ data.recipe.image_url + "' /> ";
 						           var ingredients = ""
 						           for(var ing=0; ing<data.recipe.ingredients.length; ing++){

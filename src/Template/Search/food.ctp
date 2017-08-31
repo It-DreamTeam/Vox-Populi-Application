@@ -19,11 +19,11 @@ console.log(storedNames)
         type: "POST",
         url: proxy + "http://food2fork.com/api/get",
         dataType: "json",
-        headers: {
+        /*headers: {
           "Authorization": "Token 0efc9be2a4e068ccf5dac603d0467bad2776e72d",
-        },
+        },*/
         data: {
-          "key" : "1db14a055d0691b833f56085dfd7eb57",
+          "key" : "3b43a2756e396e825d5a2bb283e727df",
           "rId": recipeId,
           "Accept": "application/json",
         },

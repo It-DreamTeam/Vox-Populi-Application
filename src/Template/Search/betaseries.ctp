@@ -15,10 +15,7 @@ $(document).ready(function() {
 
   if(tvSearch == "FILM"){
     $("#research").text(tvSearch +"S PROPOSÉS")
-    var say = "Nous vous proposons ses" + tvSearch;
-    synth = window.speechSynthesis;
-    var utterThis = new SpeechSynthesisUtterance(say);
-    synth.speak(utterThis);
+
     var arrayResearch = JSON.parse(localStorage.getItem("TVRSpeech"))
     for(let films= 0;films < arrayResearch.length; films++){
       $.ajax({
@@ -51,10 +48,6 @@ $(document).ready(function() {
     }
   }else if(tvSearch == "UPCOMINGFILMS"){
     $("#research").text("Les prochaines sorties")
-    var say = "Voici les prochaines sorties au cinéma";
-    synth = window.speechSynthesis;
-    var utterThis = new SpeechSynthesisUtterance(say);
-    synth.speak(utterThis);
 
     var arrayResearch = JSON.parse(localStorage.getItem("TVRSpeech"))
     for(let films= 0;films < arrayResearch.length; films++){
@@ -87,10 +80,6 @@ $(document).ready(function() {
     }
   }else {
     $("#research").text(tvSearch +"S PROPOSÉS")
-    var say = "Nous vous proposons ses" + tvSearch;
-    synth = window.speechSynthesis;
-    var utterThis = new SpeechSynthesisUtterance(say);
-    synth.speak(utterThis);
     var arrayResearch = JSON.parse(localStorage.getItem("TVRSpeech"))
     for(let series=0;series < arrayResearch.length; series++){
       $.ajax({
@@ -103,7 +92,7 @@ $(document).ready(function() {
         success: function(data) {
           console.log(data)
           var say = "";
-          say = data.movie.title;
+          say = data.show.title;
           synth = window.speechSynthesis;
           var utterThis = new SpeechSynthesisUtterance(say);
           synth.speak(utterThis);

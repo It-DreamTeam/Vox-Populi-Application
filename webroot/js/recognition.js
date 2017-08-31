@@ -96,9 +96,9 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
         synth.speak(utterThis);
 
           if(data.result) {
-  					setInput2(data.result.parameters.geocityfr);
-            geocityfr = data.result.parameters.geocityfr;
-            localStorage.setItem('geocityfr', data.result.parameters.geocityfr);
+  					setInput2(data.result.parameters.parameter);
+            geocityfr = data.result.parameters.parameter;
+            localStorage.setItem('geocityfr', data.result.parameters.parameter);
             window.location = '/search/home';
           }
           else {
@@ -124,14 +124,14 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
       },
       data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
       success: function(data) {
-        text = data.result.parameters.taste
+        text = data.result.parameters.parameter
 
         var say = "";
         say = data.result.fulfillment.speech;
         synth = window.speechSynthesis;
         var utterThis = new SpeechSynthesisUtterance(say);
         synth.speak(utterThis);
-        localStorage.setItem('taste', data.result.parameters.taste);
+        localStorage.setItem('taste', data.result.parameters.parameter);
 
         //NOT ALCOHOLIC
         $.ajax({
@@ -167,7 +167,7 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
       }
     })
 
-}else if(text.toLowerCase().indexOf("donne-moi la sortie des prochains films") >= 0 ){
+}else if(text.toLowerCase().indexOf("donne-moi la sortie des prochains films") >= 0 || text.toLowerCase().indexOf("quelles sont les prochaines sorties au cinéma") >= 0 || text.toLowerCase().indexOf("quelles sont les prochaines sorties au cinéma ?") >= 0 || text.toLowerCase().indexOf("quelles sont les prochaines sorties au cinéma ") >= 0 || text.toLowerCase().indexOf("quels sont les prochaines sorties au cinéma ") >= 0 || text.toLowerCase().indexOf("quels sont les prochaines sorties au cinéma") >= 0 ){
 
 // ------------------------ UPCOMING MOVIES -----------------------------
   $.ajax({
@@ -180,7 +180,8 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
       },
       data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
       success: function(data) {
-        text = data.result.parameters.upcomingMovies
+
+        text = data.result.parameters.parameter
         var say = "";
         say = data.result.fulfillment.speech;
         synth = window.speechSynthesis;
@@ -207,9 +208,6 @@ if (text.toLowerCase().indexOf("météo") >= 0 || text.toLowerCase().indexOf("M�
                 console.log("Internal Server Error");
               }
             })
-        
-
-
 
       },
       error: function() {
@@ -230,7 +228,7 @@ $.ajax({
     },
     data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
     success: function(data) {
-      text = data.result.parameters.typeTV
+      text = data.result.parameters.parameter
       var say = "";
       say = data.result.fulfillment.speech;
       synth = window.speechSynthesis;
@@ -300,7 +298,7 @@ if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().index
       },
       data: JSON.stringify({ query: text, lang: "en", sessionId: "somerandomthing" }),
       success: function(data) {
-        text = data.result.parameters.ingredient
+        text = data.result.parameters.parameter
 
         var say = "";
         say = data.result.fulfillment.speech;
@@ -308,22 +306,23 @@ if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().index
         var utterThis = new SpeechSynthesisUtterance(say);
         synth.speak(utterThis);
 
+        console.log(text)
 
         // ---------------------------- FOOD API ---------------------------------------------------------
           $.ajax({
               type: "GET",
               url: proxy + "http://food2fork.com/api/search",
-              headers: {
+            /*  headers: {
                 "Authorization": "Token 0efc9be2a4e068ccf5dac603d0467bad2776e72d",
-              },
+              },*/
               data: {
-                "key" : "1db14a055d0691b833f56085dfd7eb57",
+                "key" : "3b43a2756e396e825d5a2bb283e727df",
                 "q": text,
                 "Accept": "application/json",
               },
               success: function(data) {
                 var data = JSON.parse(data)
-
+console.log(data)
                 if(data.error){
                     alert("Nous n'avons pas compris votre requête..")
                 }else{
@@ -371,11 +370,11 @@ if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().index
     $.ajax({
         type: "GET",
         url: proxy + "http://food2fork.com/api/search",
-        headers: {
+      /*  headers: {
           "Authorization": "Token 0efc9be2a4e068ccf5dac603d0467bad2776e72d",
-        },
+        },*/
         data: {
-          "key" : "1db14a055d0691b833f56085dfd7eb57",
+          "key" : "3b43a2756e396e825d5a2bb283e727df",
           "q": text,
           "Accept": "application/json",
         },
@@ -408,10 +407,10 @@ if(text.toLowerCase().indexOf("je veux manger") >= 0 || text.toLowerCase().index
                   }
                 }
               }
-
+console.log(array)
               localStorage.setItem("foodData", JSON.stringify(array));
               localStorage.setItem("foodSpeech", JSON.stringify(text));
-              window.location = '/search/food';
+              //window.location = '/search/food';
             }
           }
         },
